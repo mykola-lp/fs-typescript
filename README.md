@@ -181,3 +181,47 @@ export const isNotNumber = (argument: any): boolean =>
 
 export default "this is the default...";
 ```
+
+### Exercise 4: Express
+
+We will continue to build the app from the previous exercises.
+
+Add now **Express** to the app dependencies and create an HTTP `GET` endpoint `/hello` that answers:
+
+```text
+Hello Full Stack!
+```
+
+The web app should be started with the following commands:
+
+- Production mode:
+
+```bash
+npm start
+```
+
+- Development mode:
+
+```bash
+npm run dev
+```
+
+Replace your existing `tsconfig.json` file with the following content:
+
+```json
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "noEmit": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "module": "nodenext",
+    "esModuleInterop": true,
+    "allowImportingTsExtensions": true
+  }
+}
+```
+
+Make sure there aren't any errors!
