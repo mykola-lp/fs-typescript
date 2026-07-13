@@ -364,3 +364,56 @@ You may also need to ignore the following rules in this exercise:
 **Important**
 
 Make sure your Express application is configured to receive JSON request bodies. See [Part 3](https://fullstackopen.com/en/part3/node_js_and_express#receiving-data).
+
+### Exercise 8: Checkup
+
+The repository you copied for the exercises contains a set of tests for the **healthapp**.
+
+### Run the tests locally
+
+1. Start the application:
+
+   ```bash
+   npm start
+   ```
+
+**Note**
+   
+The **healthapp** is expected to run on **port 3000**.
+
+2. Open a new terminal and navigate to the `healthapp-tests` directory:
+
+   ```bash
+   cd healthapp-tests
+   ```
+
+3. Before running the tests for the first time, install the dependencies:
+
+   ```bash
+   npm install
+   npx playwright install
+   ```
+
+4. Run the test suite:
+
+   ```bash
+   npm test
+   ```
+
+**Important**
+
+Make sure the application has fully started before running the tests.
+
+**Configure GitHub Actions**
+
+Update the beginning of `.github/workflows/healthapp-e2e-tests.yml` as follows:
+
+```yaml
+name: Health app E2E Tests
+
+on:
+  push:
+    branches: [main, master]
+```
+
+Push your code to GitHub and verify that all tests pass in the **Actions** tab.
