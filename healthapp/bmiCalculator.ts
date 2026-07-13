@@ -1,3 +1,5 @@
+import { isNotNumber, getErrorMessage } from "./utils.ts";
+
 interface BmiValues {
   height: number;
   weight: number;
@@ -7,7 +9,7 @@ const parseArguments = (args: string[]): BmiValues => {
   if (args.length < 4) throw new Error('Not enough arguments');
   if (args.length > 4) throw new Error('Too many arguments');
 
-  if (!isNaN(Number(args[2])) && !isNaN(Number(args[3]))) {
+  if (!isNotNumber(args[2]) && !isNotNumber(args[3])) {
     return {
       height: Number(args[2]),
       weight: Number(args[3])
@@ -17,7 +19,7 @@ const parseArguments = (args: string[]): BmiValues => {
   }
 }
 
-const classifyBmi = (height: number, weight: number): void => {
+const calculateBmi = (height: number, weight: number) => {
   const heightInMeters = height / 100;
   const bmi = weight / (heightInMeters * heightInMeters);
 
@@ -33,19 +35,13 @@ const classifyBmi = (height: number, weight: number): void => {
     res = "Obese";
   }
 
-  console.log(res);
+  return res;
 };
 
 try {
   const { height, weight } = parseArguments(process.argv);
 
-  classifyBmi(height, weight);
+  console.log(calculateBmi(height, weight));
 } catch (error: unknown) {
-  let errorMessage = "Failed to calculate BMI.";
-
-  if (error instanceof Error) {
-    errorMessage += " Error: " + error.message;
-  }
-
-  console.log(errorMessage);
+  console.log(`Failed to calculate BMI. Error: ${getErrorMessage(error)}`);
 }

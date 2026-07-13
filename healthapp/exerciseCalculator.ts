@@ -1,3 +1,5 @@
+import { isNotNumber, getErrorMessage } from "./utils.ts";
+
 interface ExerciseResult {
   period: number;
   trainingDays: number;
@@ -53,11 +55,13 @@ const parseExerciseArguments = (args: string[]): ExerciseArguments => {
     throw new Error("Not enough arguments");
   }
 
-  const numbers = args.slice(2).map(Number);
+  const values = args.slice(2);
 
-  if (numbers.some(number => isNaN(number))) {
+  if (values.some(isNotNumber)) {
     throw new Error("Provided values were not numbers!");
   }
+
+  const numbers = values.map(Number);
 
   const [target, ...dailyHours] = numbers;
 
@@ -72,11 +76,5 @@ try {
 
   console.log(calculateExercises(dailyHours, target));
 } catch (error: unknown) {
-  let errorMessage = "Failed to calculate exercise.";
-
-  if (error instanceof Error) {
-    errorMessage += " Error: " + error.message;
-  }
-
-  console.log(errorMessage);
+  console.log(`Failed to calculate exercise. Error: ${getErrorMessage(error)}`);
 }
