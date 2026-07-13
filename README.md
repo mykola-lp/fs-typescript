@@ -228,7 +228,7 @@ Make sure there aren't any errors!
 
 ### Exercise 5: Web BMI
 
-Add an endpoint for the BMI calculator that can be used by doing an HTTP `GET` request to the endpoint `/bmi` and specifying the input with query string parameters.
+Add an endpoint for the BMI calculator that can be used by doing an HTTP `GET` request to the endpoint `/bmi` and specifying the input with [query string](https://en.wikipedia.org/wiki/Query_string) parameters.
 
 For example, to get the BMI of a person with a height of `180` and a weight of `72`, the URL is:
 
@@ -246,7 +246,7 @@ The response is a JSON of the form:
 }
 ```
 
-See the Express documentation for information on how to access the query parameters.
+See the [Express documentation](https://expressjs.com/en/5x/api/) for information on how to access the query parameters.
 
 If the query parameters of the request are missing or of the wrong type, return a response with the proper status code and the following error message:
 
@@ -256,7 +256,7 @@ If the query parameters of the request are missing or of the wrong type, return 
 }
 ```
 
-Do **not** copy the calculator code to `index.ts`; instead, make it a TypeScript module that can be imported into `index.ts`.
+Do **not** copy the calculator code to `index.ts`; instead, make it a [TypeScript module](https://www.typescriptlang.org/docs/handbook/modules/introduction.html) that can be imported into `index.ts`.
 
 Consider adding the following condition to `bmiCalculator.ts`:
 
