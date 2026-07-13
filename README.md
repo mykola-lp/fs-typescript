@@ -279,3 +279,17 @@ or
 ```bash
 npm run dev
 ```
+
+### Exercise 6: Eslint
+
+Configure your project to use the above ESLint settings and fix all the warnings.
+
+**Note**
+
+At the time of writing this (28.3.2026), the most recent `typescript-eslint` version (`5.57.2`) is not compatible with **TypeScript 6**, which was released on **23.3.2026**.
+
+Because of this, the `npm install` command fails. Until a new compatible version is released, run the installation using:
+
+```bash
+npm install --legacy-peer-deps
+```
