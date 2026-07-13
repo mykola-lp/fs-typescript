@@ -10,7 +10,7 @@ interface ExerciseResult {
   average: number;
 }
 
-const calculateExercises = (dailyHours: number[], target: number): ExerciseResult => {
+export const calculateExercises = (dailyHours: number[], target: number): ExerciseResult => {
   const period = dailyHours.length;
 
   const trainingDays = dailyHours.filter(hours => hours > 0).length;
@@ -71,10 +71,12 @@ const parseExerciseArguments = (args: string[]): ExerciseArguments => {
   };
 };
 
-try {
-  const { target, dailyHours } = parseExerciseArguments(process.argv);
+if (process.argv[1] === import.meta.filename) {
+  try {
+    const { target, dailyHours } = parseExerciseArguments(process.argv);
 
-  console.log(calculateExercises(dailyHours, target));
-} catch (error: unknown) {
-  console.log(`Failed to calculate exercise. Error: ${getErrorMessage(error)}`);
+    console.log(calculateExercises(dailyHours, target));
+  } catch (error: unknown) {
+    console.log(`Failed to calculate exercise. Error: ${getErrorMessage(error)}`);
+  }
 }

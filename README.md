@@ -293,3 +293,74 @@ Because of this, the `npm install` command fails. Until a new compatible version
 ```bash
 npm install --legacy-peer-deps
 ```
+
+### Exercise 7: WebExercises
+
+Add an endpoint to your app for the exercise calculator.
+
+It should be used by making an HTTP **POST** request to:
+
+```text
+http://localhost:3000/exercises
+```
+
+with the following request body:
+
+```json
+{
+  "daily_exercises": [1, 0, 2, 0, 3, 0, 2.5],
+  "target": 2.5
+}
+```
+
+The response should be a JSON object in the following format:
+
+```json
+{
+  "periodLength": 7,
+  "trainingDays": 4,
+  "success": false,
+  "rating": 1,
+  "ratingDescription": "bad",
+  "target": 2.5,
+  "average": 1.2142857142857142
+}
+```
+
+If the request body is invalid, return an appropriate status code and one of the following error messages:
+
+```json
+{
+  "error": "parameters missing"
+}
+```
+
+or
+
+```json
+{
+  "error": "malformatted parameters"
+}
+```
+
+The latter should be returned when the provided values are not numbers (or cannot be converted to numbers).
+
+**Note**
+
+In this exercise, you may find it useful to use the explicit `any` type when handling the request body.
+
+Since the ESLint configuration forbids this, you can disable the rule for a single line with:
+
+```ts
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+ ```
+
+You may also need to ignore the following rules in this exercise:
+
+ - `@typescript-eslint/no-unsafe-member-access`
+ - `@typescript-eslint/no-unsafe-assignment`
+ - `@typescript-eslint/no-unsafe-call`
+
+**Important**
+
+Make sure your Express application is configured to receive JSON request bodies. See [Part 3](https://fullstackopen.com/en/part3/node_js_and_express#receiving-data).
