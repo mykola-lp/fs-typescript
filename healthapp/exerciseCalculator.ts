@@ -43,4 +43,40 @@ const calculateExercises = (dailyHours: number[], target: number): ExerciseResul
   };
 };
 
-console.log(calculateExercises([3, 0, 2, 4.5, 0, 3, 1], 2));
+interface ExerciseArguments {
+  target: number;
+  dailyHours: number[];
+}
+
+const parseExerciseArguments = (args: string[]): ExerciseArguments => {
+  if (args.length < 4) {
+    throw new Error("Not enough arguments");
+  }
+
+  const numbers = args.slice(2).map(Number);
+
+  if (numbers.some(number => isNaN(number))) {
+    throw new Error("Provided values were not numbers!");
+  }
+
+  const [target, ...dailyHours] = numbers;
+
+  return {
+    target,
+    dailyHours,
+  };
+};
+
+try {
+  const { target, dailyHours } = parseExerciseArguments(process.argv);
+
+  console.log(calculateExercises(dailyHours, target));
+} catch (error: unknown) {
+  let errorMessage = "Failed to calculate exercise.";
+
+  if (error instanceof Error) {
+    errorMessage += " Error: " + error.message;
+  }
+
+  console.log(errorMessage);
+}
