@@ -1,3 +1,5 @@
+import { isNotNumber, getErrorMessage } from "./utils.ts";
+
 interface ExerciseResult {
   period: number;
   trainingDays: number;
@@ -43,4 +45,36 @@ const calculateExercises = (dailyHours: number[], target: number): ExerciseResul
   };
 };
 
-console.log(calculateExercises([3, 0, 2, 4.5, 0, 3, 1], 2));
+interface ExerciseArguments {
+  target: number;
+  dailyHours: number[];
+}
+
+const parseExerciseArguments = (args: string[]): ExerciseArguments => {
+  if (args.length < 4) {
+    throw new Error("Not enough arguments");
+  }
+
+  const values = args.slice(2);
+
+  if (values.some(isNotNumber)) {
+    throw new Error("Provided values were not numbers!");
+  }
+
+  const numbers = values.map(Number);
+
+  const [target, ...dailyHours] = numbers;
+
+  return {
+    target,
+    dailyHours,
+  };
+};
+
+try {
+  const { target, dailyHours } = parseExerciseArguments(process.argv);
+
+  console.log(calculateExercises(dailyHours, target));
+} catch (error: unknown) {
+  console.log(`Failed to calculate exercise. Error: ${getErrorMessage(error)}`);
+}
