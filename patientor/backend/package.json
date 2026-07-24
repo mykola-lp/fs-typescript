@@ -6,8 +6,8 @@
   "type": "module",
   "scripts": {
     "tsc": "tsc",
-    "dev": "concurrently \"tsc --watch\" \"node --watch --experimental-transform-types index.ts\"",
-    "start": "node --experimental-transform-types index.ts",
+    "dev": "concurrently \"tsc --watch\" \"node --watch --experimental-transform-types --disable-warning=ExperimentalWarning index.ts\"",
+    "start": "node --experimental-transform-types --disable-warning=ExperimentalWarning index.ts",
     "lint": "eslint ."
   },
   "keywords": [],
