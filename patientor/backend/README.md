@@ -44,3 +44,13 @@ Structure your code properly by using meaningfully-named directories and files.
 **Note:** that diagnoses may or may not contain the field latin. You might want to use [optional properties](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#optional-properties) in the type definition.
 
 **Hint:** Enabling the ESLint rule [consistent-type-imports](https://typescript-eslint.io/rules/consistent-type-imports/) could save you from many headaches.
+
+### Exercise 12: Patientor backend, step4
+
+Create data type Patient and set up the GET endpoint /api/patients which returns all the patients to the frontend, excluding field ssn. Use a [utility type](https://www.typescriptlang.org/docs/handbook/utility-types.html) to make sure you are selecting and returning only the wanted fields.
+
+In this exercise, you may assume that field gender has type string.
+
+Try the endpoint with your browser and ensure that ssn is not included in the response.
+
+After creating the endpoint, ensure that the frontend shows the list of patients.
