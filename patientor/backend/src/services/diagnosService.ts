@@ -2,7 +2,7 @@ import diagnoses from '../../data/diagnoses.ts';
 
 import type { Diagnosis } from '../types.ts';
 
-const getEntries = (): Diagnosis[] => {
+const getDiagnoses = (): Diagnosis[] => {
   return diagnoses;
 };
 
@@ -11,6 +11,6 @@ const addDiagnos = () => {
 };
 
 export default {
-  getEntries,
+  getDiagnoses,
   addDiagnos
 };

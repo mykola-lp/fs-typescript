@@ -5,7 +5,7 @@ import diagnosService from '../services/diagnosService.ts';
 const router = express.Router();
 
 router.get('/', (_req, res) => {
-  const data = diagnosService.getEntries()
+  const data = diagnosService.getDiagnoses();
   res.send(data);
 });
 
