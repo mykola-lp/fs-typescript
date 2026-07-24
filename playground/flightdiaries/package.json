@@ -1,9 +1,12 @@
 {
   "type": "module",
   "scripts": {
-    "tsc": "tsc"  
+    "tsc": "tsc"
   },
   "devDependencies": {
     "typescript": "^7.0.2"
+  },
+  "dependencies": {
+    "express": "^5.2.1"
   }
 }
