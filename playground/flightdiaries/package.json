@@ -1,8 +1,14 @@
 {
+  "name": "flightdiaries",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
   "type": "module",
   "scripts": {
     "tsc": "tsc"
   },
+  "author": "",
+  "license": "ISC",
   "devDependencies": {
     "@eslint/js": "^10.0.1",
     "@stylistic/eslint-plugin": "^5.10.0",
