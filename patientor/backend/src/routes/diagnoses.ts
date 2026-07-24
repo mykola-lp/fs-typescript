@@ -1,9 +1,12 @@
 import express from 'express';
 
+import diagnosService from '../services/diagnosService.ts';
+
 const router = express.Router();
 
 router.get('/', (_req, res) => {
-  res.send('Fetching all diagnoses!');
+  const data = diagnosService.getEntries()
+  res.send(data);
 });
 
 router.post('/', (_req, res) => {
