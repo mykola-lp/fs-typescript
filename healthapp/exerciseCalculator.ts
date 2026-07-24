@@ -1,7 +1,7 @@
 import { isNotNumber, getErrorMessage } from "./utils.ts";
 
 interface ExerciseResult {
-  period: number;
+  periodLength: number;
   trainingDays: number;
   success: boolean;
   rating: number;
@@ -11,12 +11,12 @@ interface ExerciseResult {
 }
 
 export const calculateExercises = (dailyHours: number[], target: number): ExerciseResult => {
-  const period = dailyHours.length;
+  const periodLength = dailyHours.length;
 
   const trainingDays = dailyHours.filter(hours => hours > 0).length;
   const totalHours = dailyHours.reduce((sum, hours) => sum + hours, 0);
 
-  const average = totalHours / period;
+  const average = totalHours / periodLength;
 
   const success = average >= target;
 
@@ -35,7 +35,7 @@ export const calculateExercises = (dailyHours: number[], target: number): Exerci
   }
 
   return {
-    period,
+    periodLength,
     trainingDays,
     success,
     rating,
