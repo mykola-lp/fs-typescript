@@ -1,4 +1,4 @@
-import diaryData from '../../data/entries.json' with { type: "json" };
+import diaryData from '../../data/entries.ts';
 
 import type { DiaryEntry } from '../types.ts';
 
