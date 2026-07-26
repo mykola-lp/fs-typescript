@@ -6,10 +6,6 @@ import type { NonSensitiveDiaryEntry } from "../types.ts";
 
 const router = express.Router();
 
-router.get('/', (_req, res) => {
-  res.send(diaryService.getNonSensitiveEntries());
-});
-
 router.get('/', (_req, res: Response<NonSensitiveDiaryEntry[]>) => {
   res.send(diaryService.getNonSensitiveEntries());
 });
