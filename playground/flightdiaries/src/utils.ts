@@ -1,16 +1,67 @@
-import type { NewDiaryEntry } from './types.ts';
+import { Weather, Visibility, type NewDiaryEntry } from './types.ts';
 
 const parseNewDiaryEntry = (object: unknown): NewDiaryEntry => {
+  if ( !object || typeof object !== 'object' ) {
+    throw new Error('Incorrect or missing data');
+  }
 
- console.log(object); // now object is no longer unused
- const newEntry: NewDiaryEntry = {
-   weather: 'cloudy', // fake the return value
-   visibility: 'great',
-   date: '2026-1-1',
-   comment: 'fake news'
- };
+  if ('comment' in object && 'date' in object && 'weather' in object && 'visibility' in object)  {
+    const newEntry: NewDiaryEntry = {
+      weather: parseWeather(object.weather),
+      visibility: parseVisibility(object.visibility),
+      date: parseDate(object.date),
+      comment: parseComment(object.comment)
+    };
 
- return newEntry;
+    return newEntry;
+  }
+
+  throw new Error('Incorrect data: some fields are missing');
+};
+
+const parseWeather = (weather: unknown): Weather => {
+  if (!weather || !isString(weather) || !isWeather(weather)) {
+    throw new Error('Incorrect or missing weather: ' + weather);
+  }
+  return weather;
+};
+
+const isString = (text: unknown): text is string => {
+  return typeof text === 'string' || text instanceof String;
+};
+
+const isWeather = (param: string): param is Weather => {
+  return (Object.values(Weather) as string[]).includes(param);
+};
+
+const parseVisibility = (visibility: unknown): Visibility => {
+  if (!visibility || !isString(visibility) || !isVisibility(visibility)) {
+    throw new Error('Incorrect or missing visibility: ' + visibility);
+  }
+  return visibility;
+};
+
+const isVisibility = (param: string): param is Visibility => {
+  return (Object.values(Visibility) as string[]).includes(param);
+};
+
+const parseDate = (date: unknown): string => {
+  if (!date || !isString(date) || !isDate(date)) {
+    throw new Error('Incorrect or missing date: ' + date);
+  }
+  return date;
+};
+
+const isDate = (date: string): boolean => {
+  return Boolean(Date.parse(date));
+};
+
+const parseComment = (comment: unknown): string => {
+  if (!comment || !isString(comment)) {
+    throw new Error('Incorrect or missing comment');
+  }
+
+  return comment;
 };
 
 export default parseNewDiaryEntry;
