@@ -54,3 +54,7 @@ In this exercise, you may assume that field gender has type string.
 Try the endpoint with your browser and ensure that ssn is not included in the response.
 
 After creating the endpoint, ensure that the frontend shows the list of patients.
+
+### Exercise 13: Patientor backend, step5
+
+Create a POST endpoint /api/patients for adding patients. Ensure that you can add patients also from the frontend. You can create unique ids of type string using the uuid (opens in a new tab) library:
