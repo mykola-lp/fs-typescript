@@ -33,7 +33,7 @@ const parseNewPatientEntry = (object: unknown): NewPatient => {
       name: z.string().parse(object.name),
       dateOfBirth: z.iso.date().parse(object.dateOfBirth),
       ssn: z.string().parse(object.ssn),
-      gender: parseGender(object.gender),
+      gender: z.enum(Gender).parse(object.gender),
       occupation: parseOccupation(object.occupation),
     };
     return newEntry;
