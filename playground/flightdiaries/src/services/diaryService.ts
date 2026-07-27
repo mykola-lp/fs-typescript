@@ -2,7 +2,7 @@ import diaryData from '../../data/entries.ts';
 
 import type { NonSensitiveDiaryEntry, DiaryEntry, NewDiaryEntry } from '../types.ts';
 
-const diaries: DiaryEntry[] = diaryData as DiaryEntry[];
+const diaries: DiaryEntry[] = diaryData;
 
 const getEntries = (): DiaryEntry[]  => { 
   return diaries;
