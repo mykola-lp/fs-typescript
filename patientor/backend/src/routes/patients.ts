@@ -6,8 +6,6 @@ import { type NonSensitivePatient, type Patient, NewPatientEntrySchema } from '.
 
 import patientService from '../services/patientService.ts';
 
-import parseNewPatientEntry from '../utils.ts';
-
 const router = express.Router();
 
 router.get('/', (_req, res: Response<NonSensitivePatient[]>) => {
