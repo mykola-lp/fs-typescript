@@ -2,10 +2,6 @@ import { Gender, type NewPatient } from './types.ts';
 
 import { z } from 'zod';
 
-const parseOccupation = (occupation: unknown): string => {
-  return z.string().parse(occupation);
-};
-
 const parseNewPatientEntry = (object: unknown): NewPatient => {
   if (!object || typeof object !== 'object') {
     throw new Error('Incorrect or missing data');
