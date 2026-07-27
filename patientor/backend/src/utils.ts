@@ -6,10 +6,6 @@ const isString = (text: unknown): text is string => {
   return typeof text === 'string' || text instanceof String;
 };
 
-const parseGender = (gender: unknown): Gender => {
-  return z.enum(Gender).parse(gender);
-};
-
 const parseOccupation = (occupation: unknown): string => {
   if (!occupation || !isString(occupation)) {
     throw new Error('Incorrect or missing occupation: ' + occupation);
