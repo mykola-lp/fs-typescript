@@ -4,7 +4,7 @@ import diaryService from '../services/diaryService.ts';
 
 import { type NonSensitiveDiaryEntry, type NewDiaryEntry, type DiaryEntry } from '../types.ts';
 
-import { newDiaryParser } from '../middleware.ts';
+import { newDiaryParser, errorMiddleware } from '../middleware.ts';
 
 const router = express.Router();
 
@@ -26,5 +26,7 @@ router.post('/', newDiaryParser, (req: Request<unknown, unknown, NewDiaryEntry>,
   const addedEntry = diaryService.addDiary(req.body);  
   res.json(addedEntry);
 });
+
+router.use(errorMiddleware);
 
 export default router;
