@@ -1,5 +1,7 @@
 import { Gender, type NewPatient } from './types.ts';
 
+import { z } from 'zod';
+
 const isString = (text: unknown): text is string => {
   return typeof text === 'string' || text instanceof String;
 };
@@ -60,7 +62,7 @@ const parseNewPatientEntry = (object: unknown): NewPatient => {
     'occupation' in object
   ) {
     const newEntry: NewPatient = {
-      name: parseName(object.name),
+      name: z.string().parse(object.name),
       dateOfBirth: parseDateOfBirth(object.dateOfBirth),
       ssn: parseSsn(object.ssn),
       gender: parseGender(object.gender),
