@@ -7,10 +7,7 @@ const isString = (text: unknown): text is string => {
 };
 
 const parseOccupation = (occupation: unknown): string => {
-  if (!occupation || !isString(occupation)) {
-    throw new Error('Incorrect or missing occupation: ' + occupation);
-  }
-  return occupation;
+  return z.string().parse(occupation);
 };
 
 const parseNewPatientEntry = (object: unknown): NewPatient => {
