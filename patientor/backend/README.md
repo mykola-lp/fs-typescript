@@ -73,3 +73,16 @@ Refactor the gender field to use a const object based type.
 ### Exercise 15: Patientor backend, step7
 
 Use Zod to validate the requests to the POST endpoint /api/patients.
+
+### Exercise 16: Checkup
+
+Similarly to Exercise 8, run the tests in the directory patientor-api-tests. Tests assume that the backend runs on port 3001.
+
+Enable those also in GitHub by modifying .github/workflows/patientor-api-tests.yml as follows:
+
+```yaml
+name: Patientor API Tests
+on:
+  push:
+    branches: [ main, master ]
+```
