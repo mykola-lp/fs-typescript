@@ -6,10 +6,6 @@ const isString = (text: unknown): text is string => {
   return typeof text === 'string' || text instanceof String;
 };
 
-const isGender = (param: string): param is Gender => {
-  return (Object.values(Gender) as string[]).includes(param);
-};
-
 const parseGender = (gender: unknown): Gender => {
   return z.enum(Gender).parse(gender);
 };
