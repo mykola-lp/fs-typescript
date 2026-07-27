@@ -14,13 +14,6 @@ const isGender = (param: string): param is Gender => {
   return (Object.values(Gender) as string[]).includes(param);
 };
 
-const parseSsn = (ssn: unknown): string => {
-  if (!ssn || !isString(ssn)) {
-    throw new Error('Incorrect or missing ssn: ' + ssn);
-  }
-  return ssn;
-};
-
 const parseGender = (gender: unknown): Gender => {
   if (!gender || !isString(gender) || !isGender(gender)) {
     throw new Error('Incorrect or missing gender: ' + gender);
