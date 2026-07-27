@@ -6,10 +6,6 @@ const isString = (text: unknown): text is string => {
   return typeof text === 'string' || text instanceof String;
 };
 
-const isDate = (date: string): boolean => {
-  return Boolean(Date.parse(date));
-};
-
 const isGender = (param: string): param is Gender => {
   return (Object.values(Gender) as string[]).includes(param);
 };
