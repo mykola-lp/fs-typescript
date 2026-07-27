@@ -1,5 +1,5 @@
-import express from 'express';
 import cors from 'cors';
+import express from 'express';
 
 import diagnosRouter from './routes/diagnoses.ts';
 import patientRouter from './routes/patients.ts';

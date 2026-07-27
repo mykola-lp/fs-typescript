@@ -1,5 +1,4 @@
 import { type Request, type Response, type NextFunction } from 'express';
-
 import { z } from 'zod';
 
 import { NewPatientEntrySchema } from './types.ts';
