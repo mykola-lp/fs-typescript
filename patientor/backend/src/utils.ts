@@ -14,13 +14,6 @@ const isGender = (param: string): param is Gender => {
   return (Object.values(Gender) as string[]).includes(param);
 };
 
-const parseName = (name: unknown): string => {
-  if (!name || !isString(name)) {
-    throw new Error('Incorrect or missing name: ' + name);
-  }
-  return name;
-};
-
 const parseDateOfBirth = (dateOfBirth: unknown): string => {
   if (!dateOfBirth || !isString(dateOfBirth) || !isDate(dateOfBirth)) {
     throw new Error('Incorrect or missing dateOfBirth: ' + dateOfBirth);
