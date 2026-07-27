@@ -2,7 +2,7 @@ import express, { type Response } from 'express';
 
 import { z } from 'zod';
 
-import type { NonSensitivePatient, Patient } from '../types.ts';
+import { type NonSensitivePatient, type Patient, NewPatientEntrySchema } from '../types.ts';
 
 import patientService from '../services/patientService.ts';
 
@@ -16,7 +16,7 @@ router.get('/', (_req, res: Response<NonSensitivePatient[]>) => {
 
 router.post('/', (req, res: Response<Patient | { error: unknown }>) => {
   try {
-    const newPatient = parseNewPatientEntry(req.body);
+    const newPatient = NewPatientEntrySchema.parse(req.body);
     const addedPatient = patientService.addPatient(newPatient);
     res.json(addedPatient);
   } catch (error: unknown) {
