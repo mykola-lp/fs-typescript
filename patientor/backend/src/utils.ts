@@ -2,10 +2,6 @@ import { Gender, type NewPatient } from './types.ts';
 
 import { z } from 'zod';
 
-const isString = (text: unknown): text is string => {
-  return typeof text === 'string' || text instanceof String;
-};
-
 const parseOccupation = (occupation: unknown): string => {
   return z.string().parse(occupation);
 };
