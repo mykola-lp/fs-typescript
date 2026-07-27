@@ -1,0 +1,54 @@
+### Get all diary entries
+GET http://localhost:3000/api/diaries
+
+### Get single diary entry by id
+GET http://localhost:3000/api/diaries/1
+
+### Add new valid diary entry
+POST http://localhost:3000/api/diaries
+Content-Type: application/json
+
+{
+  "date": "2026-06-01",
+  "weather": "sunny",
+  "visibility": "good",
+  "comment": "nice day"
+}
+
+### Invalid weather - should return 400
+POST http://localhost:3000/api/diaries
+Content-Type: application/json
+
+{
+  "date": "2026-06-01",
+  "weather": "tornado",
+  "visibility": "good",
+  "comment": "test"
+}
+
+### Invalid date format - should return 400
+POST http://localhost:3000/api/diaries
+Content-Type: application/json
+
+{
+  "date": "01-06-2026",
+  "weather": "sunny",
+  "visibility": "good",
+  "comment": "test"
+}
+
+### Missing field (comment) - should return 400
+POST http://localhost:3000/api/diaries
+Content-Type: application/json
+
+{
+  "date": "2026-06-01",
+  "weather": "sunny",
+  "visibility": "good"
+}
+
+### Empty body - should return 400
+POST http://localhost:3000/api/diaries
+Content-Type: application/json
+
+{}
