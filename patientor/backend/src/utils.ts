@@ -1,6 +1,6 @@
-import { type NewPatientEntry, NewPatientEntrySchema } from './types.ts';
+import { type NewPatient, NewPatientEntrySchema } from './types.ts';
 
-const parseNewPatientEntry = (object: unknown): NewPatientEntry => {
+const parseNewPatientEntry = (object: unknown): NewPatient => {
   return NewPatientEntrySchema.parse(object);
 };
 

@@ -16,19 +16,6 @@ export const Gender = {
 
 export type Gender = typeof Gender[keyof typeof Gender];
 
-export interface Patient {
-  id: string;
-  name: string;
-  dateOfBirth: string;
-  ssn: string;
-  gender: Gender;
-  occupation: string;
-}
-
-export type NewPatient = Omit<Patient, 'id'>;
-
-export type NonSensitivePatient = Omit<Patient, 'ssn'>;
-
 export const NewPatientEntrySchema = z.object({
   name: z.string(),
   dateOfBirth: z.iso.date(),
@@ -37,4 +24,10 @@ export const NewPatientEntrySchema = z.object({
   occupation: z.string(),
 });
 
-export type NewPatientEntry = z.infer<typeof NewPatientEntrySchema>;
+export type NewPatient = z.infer<typeof NewPatientEntrySchema>;
+
+export interface Patient extends NewPatient {
+  id: string;
+}
+
+export type NonSensitivePatient = Omit<Patient, 'ssn'>;
