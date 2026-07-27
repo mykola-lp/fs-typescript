@@ -50,7 +50,7 @@ const parseNewPatientEntry = (object: unknown): NewPatient => {
     const newEntry: NewPatient = {
       name: z.string().parse(object.name),
       dateOfBirth: z.iso.date().parse(object.dateOfBirth),
-      ssn: parseSsn(object.ssn),
+      ssn: z.string().parse(object.ssn),
       gender: parseGender(object.gender),
       occupation: parseOccupation(object.occupation),
     };
