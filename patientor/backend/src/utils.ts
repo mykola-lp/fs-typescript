@@ -23,7 +23,7 @@ const parseNewPatientEntry = (object: unknown): NewPatient => {
       dateOfBirth: z.iso.date().parse(object.dateOfBirth),
       ssn: z.string().parse(object.ssn),
       gender: z.enum(Gender).parse(object.gender),
-      occupation: parseOccupation(object.occupation),
+      occupation: z.string().parse(object.occupation),
     };
     return newEntry;
   }
