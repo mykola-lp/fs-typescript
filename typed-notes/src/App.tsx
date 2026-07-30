@@ -5,13 +5,7 @@ import axios from 'axios';
 import type { Note } from './types'
 
 const App = () => {
-  const [notes, setNotes] = useState<Note[]>([
-    {
-      id: '1',
-      content: 'testing'
-    }
-  ]);
-
+  const [notes, setNotes] = useState<Note[]>([]);
   const [newNote, setNewNote] = useState('');
 
   useEffect(() => {
