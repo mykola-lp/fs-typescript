@@ -7,7 +7,7 @@ interface CoursePartWithDescription extends CoursePartBase {
   description: string;
 }
 
-export interface CoursePartBasic extends CoursePartBase {
+export interface CoursePartBasic extends CoursePartWithDescription {
   description: string;
   kind: "basic";
 }
@@ -17,10 +17,9 @@ export interface CoursePartGroup extends CoursePartBase {
   kind: "group";
 }
 
-export interface CoursePartBackground extends CoursePartBase {
-  description: string;
+interface CoursePartBackground extends CoursePartWithDescription {
   backgroundMaterial: string;
-  kind: "background";
+  kind: "background"
 }
 
 export type CoursePart = CoursePartBasic | CoursePartGroup | CoursePartBackground;
