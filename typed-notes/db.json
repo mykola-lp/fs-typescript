@@ -1,0 +1,16 @@
+{
+  "notes": [
+    {
+      "id": "1",
+      "content": "testing"
+    },
+    {
+      "id": "2",
+      "content": "learning TypeScript with React"
+    },
+    {
+      "id": "3",
+      "content": "buy milk"
+    }
+  ]
+}
