@@ -1,4 +1,6 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+
+import axios from 'axios';
 
 import type { Note } from './types'
 
@@ -11,6 +13,14 @@ const App = () => {
   ]);
 
   const [newNote, setNewNote] = useState('');
+
+  useEffect(() => {
+    axios
+      .get<Note[]>('http://localhost:3001/notes')
+      .then(response => {
+        console.log(response.data);
+      })
+  }, []);
 
   const noteCreation = (event: React.SyntheticEvent) => {
     event.preventDefault();
