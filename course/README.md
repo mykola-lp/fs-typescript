@@ -1,75 +1,94 @@
-# React + TypeScript + Vite
+# Course
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Exercises
 
-Currently, two official plugins are available:
+### Exercise 17: Course, step1
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Create a new Vite app with TypeScript in the `course` directory of your submission repository.
 
-## React Compiler
+This exercise is similar to the one already done in [Part 1](https://fullstackopen.com/en/part1/java_script#exercises-1-3-1-5) of the course, but with TypeScript and some extra tweaks.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Start off by modifying the contents of `main.tsx` to the following:
 
-## Expanding the ESLint configuration
+```tsx
+import ReactDOM from 'react-dom/client'
+import App from './App';
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+ReactDOM.createRoot(document.getElementById('root')!).render(
+  <App />
+)
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+And `App.tsx`:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
+```tsx
+const App = () => {
+  const courseName = "Half Stack application development";
+  const courseParts = [
+    {
+      name: "Fundamentals",
+      exerciseCount: 10
     },
-  },
-])
+    {
+      name: "Using props to pass data",
+      exerciseCount: 7
+    },
+    {
+      name: "Deeper type usage",
+      exerciseCount: 14
+    }
+  ];
 
+  const totalExercises = courseParts.reduce((sum, part) => sum + part.exerciseCount, 0);
+
+  return (
+    <div>
+      <h1>{courseName}</h1>
+      <p>
+        {courseParts[0].name} {courseParts[0].exerciseCount}
+      </p>
+      <p>
+        {courseParts[1].name} {courseParts[1].exerciseCount}
+      </p>
+      <p>
+        {courseParts[2].name} {courseParts[2].exerciseCount}
+      </p>
+      <p>
+        Number of exercises {totalExercises}
+      </p>
+    </div>
+  );
+};
+
+export default App;
+```
+
+Remove the unnecessary boilerplate files that Vite generates by default.
+
+The whole app is currently in one component — that's not what we want.
+
+Refactor the code so it consists of three components:
+
+- **`Header`** — renders the name of the course
+- **`Content`** — renders the names of the different parts and the number of exercises in each part
+- **`Total`** — renders the total sum of exercises in all parts
+
+All data stays in the `App` component, which passes the necessary data down to each component as **props**.
+
+> **Be sure to add type declarations for each component's props!**
+
+The `App` component should look somewhat like this:
+
+```tsx
+const App = () => {
+  // const-declarations
+
+  return (
+    <div>
+      <Header name={courseName} />
+      <Content ... />
+      <Total ... />
+    </div>
+  )
+};
 ```
