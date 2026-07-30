@@ -3,6 +3,10 @@ export interface CoursePartBase {
   exerciseCount: number;
 }
 
+interface CoursePartWithDescription extends CoursePartBase {
+  description: string;
+}
+
 export interface CoursePartBasic extends CoursePartBase {
   description: string;
   kind: "basic";
