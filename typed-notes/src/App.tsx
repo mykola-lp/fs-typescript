@@ -12,9 +12,21 @@ const App = () => {
 
   const [newNote, setNewNote] = useState('');
 
+  const noteCreation = (event: React.SyntheticEvent) => {
+    event.preventDefault();
+    
+    const noteToAdd = {
+      content: newNote,
+      id: String(notes.length + 1)
+    };
+
+    setNotes(notes.concat(noteToAdd));
+    setNewNote('');
+  };
+
   return (
     <div>
-      <form>
+      <form onSubmit={noteCreation}>
         <input
           value={newNote}
           onChange={(event) => setNewNote(event.target.value)}
