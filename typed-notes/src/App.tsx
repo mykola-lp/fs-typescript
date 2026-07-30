@@ -24,15 +24,17 @@ const App = () => {
   }, []);
 
   const noteCreation = (event: React.SyntheticEvent) => {
-    event.preventDefault();
-    
-    const noteToAdd = {
-      content: newNote,
-      id: String(notes.length + 1)
-    };
+    event.preventDefault()
 
-    setNotes(notes.concat(noteToAdd));
-    setNewNote('');
+    axios
+      .post<Note>('http://localhost:3001/notes', {
+        content: newNote
+      })
+      .then(response => {
+        setNotes(notes.concat(response.data))
+      })
+
+    setNewNote('')
   };
 
   return (
