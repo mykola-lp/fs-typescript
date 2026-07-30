@@ -18,16 +18,16 @@ const Part = ({ coursePart }: PartProps) => {
     case "basic":
       return (
         <p>
-          {coursePart.name} {coursePart.exerciseCount}
+          <b>{coursePart.name} {coursePart.exerciseCount}</b>
           <br />
-          {coursePart.description}
+          <i>{coursePart.description}</i>
         </p>
       );
 
     case "group":
       return (
         <p>
-          {coursePart.name} {coursePart.exerciseCount}
+          <b>{coursePart.name} {coursePart.exerciseCount}</b>
           <br />
           project exercises {coursePart.groupProjectCount}
         </p>
@@ -36,9 +36,9 @@ const Part = ({ coursePart }: PartProps) => {
     case "background":
       return (
         <p>
-          {coursePart.name} {coursePart.exerciseCount}
+          <b>{coursePart.name} {coursePart.exerciseCount}</b>
           <br />
-          {coursePart.description}
+          <i>{coursePart.description}</i>
           <br />
           submit to {coursePart.backgroundMaterial}
         </p>
@@ -47,9 +47,9 @@ const Part = ({ coursePart }: PartProps) => {
     case "special":
       return (
         <p>
-          {coursePart.name} {coursePart.exerciseCount}
+          <b>{coursePart.name} {coursePart.exerciseCount}</b>
           <br />
-          {coursePart.description}
+          <i>{coursePart.description}</i>
           <br />
           required skills: {coursePart.requirements.join(', ')}
         </p>
