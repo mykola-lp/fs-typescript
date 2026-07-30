@@ -1,8 +1,11 @@
 import ReactDOM from 'react-dom/client'
-import type { ReactElement } from 'react'
 
-const Welcome = ({ name }: { name: string }): ReactElement => {
-  return <h1>Hello, {name}</h1>;
+interface WelcomeProps {
+  name: string;
+}
+
+const Welcome = (props: WelcomeProps) => {
+  return <h1>Hello, {props.name}</h1>;
 };
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
