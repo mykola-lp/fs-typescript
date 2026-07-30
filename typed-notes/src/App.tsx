@@ -16,9 +16,10 @@ const App = () => {
 
   useEffect(() => {
     axios
-      .get<Note[]>('http://localhost:3001/notes')
+      .get('http://localhost:3001/notes')
       .then(response => {
-        console.log(response.data);
+        // response.body is of type any
+        setNotes(response.data as Note[])
       })
   }, []);
 
