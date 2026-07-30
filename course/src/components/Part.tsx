@@ -44,6 +44,17 @@ const Part = ({ coursePart }: PartProps) => {
         </p>
       );
 
+    case "special":
+      return (
+        <p>
+          {coursePart.name} {coursePart.exerciseCount}
+          <br />
+          {coursePart.description}
+          <br />
+          required skills: {coursePart.requirements.join(', ')}
+        </p>
+      );
+
     default:
       return assertNever(coursePart);
   }
