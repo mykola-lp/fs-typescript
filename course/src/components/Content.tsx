@@ -4,6 +4,15 @@ interface ContentProps {
   courseParts: CoursePart[];
 }
 
+/**
+ * Helper function for exhaustive type checking
+ */
+const assertNever = (value: never): never => {
+  throw new Error(
+    `Unhandled discriminated union member: ${JSON.stringify(value)}`
+  );
+};
+
 const Content = ({ courseParts }: ContentProps) => {
   return (
     <>
@@ -39,7 +48,7 @@ const Content = ({ courseParts }: ContentProps) => {
             );
 
           default:
-            return null;
+            return assertNever(part);
         }
       })}
     </>
