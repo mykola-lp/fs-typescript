@@ -34,6 +34,12 @@ const App = () => {
 
         <button type='submit'>add</button>
       </form>
+
+      <ul>
+        {notes.map((note) => (
+          <li key={note.id}>{note.content}</li>
+        ))}
+      </ul>
     </div>
   )
 }
