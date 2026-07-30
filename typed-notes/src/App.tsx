@@ -14,11 +14,14 @@ const App = () => {
 
   return (
     <div>
-      <ul>
-        {notes.map(note =>
-          <li key={note.id}>{note.content}</li>
-        )}
-      </ul>
+      <form>
+        <input
+          value={newNote}
+          onChange={(event) => setNewNote(event.target.value)}
+        />
+
+        <button type='submit'>add</button>
+      </form>
     </div>
   )
 }
