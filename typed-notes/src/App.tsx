@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import axios from 'axios';
 
-import type { Note } from './types'
+import type { Note, NewNote } from './types'
 
 const App = () => {
   const [notes, setNotes] = useState<Note[]>([]);
