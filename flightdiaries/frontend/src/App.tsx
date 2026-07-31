@@ -2,6 +2,7 @@ import { useState } from 'react';
 import type { SyntheticEvent } from 'react';
 
 import Heading from './components/Heading';
+import DiaryList from './components/DiaryList';
 
 import type { NewDiaryEntry, Weather, Visibility } from './types';
 import { useDiaries } from './hooks/useDiaries';
@@ -228,19 +229,7 @@ function App() {
 
       <Heading level={2} text="Diary entries" />
 
-      <ul>
-        {diaries.map((diary) => (
-          <li key={diary.id}>
-            <div className="diary-entry-header">
-              <strong className="diary-date">{diary.date}</strong>
-              <span className="diary-weather">{diary.weather}</span>
-              <span className="diary-visibility">{diary.visibility}</span>
-            </div>
-
-            {diary.comment && <p className="diary-entry-comment">{diary.comment}</p>}
-          </li>
-        ))}
-      </ul>
+      <DiaryList diaries={diaries} />
     </div>
   );
 }
