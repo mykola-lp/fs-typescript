@@ -6,6 +6,8 @@ import type { DiaryEntry, NewDiaryEntry, Weather, Visibility, ValidationError } 
 
 import diaryService from './services/diaries';
 
+import './index.css'
+
 function getTodayDate() {
   return new Date().toISOString().slice(0, 10);
 }
@@ -73,16 +75,19 @@ function App() {
 
       <form onSubmit={addDiary}>
         <div>
-          <label htmlFor="date">date:</label>
-          <input
-            type="date"
-            id="date"
-            name="date"
-            value={date}
-            onChange={(event) => setDate(event.target.value)}
-            min="1900-01-01"
-            max={getTodayDate()}
-          />
+          <label>
+            date:
+            <input
+              type="date"
+              name="date"
+              value={date}
+              onChange={(event) => setDate(event.target.value)}
+              min="1900-01-01"
+              max={getTodayDate()}
+              required
+            />
+            <span className="validity"></span>
+          </label>
         </div>
 
         <div>
