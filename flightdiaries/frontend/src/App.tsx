@@ -169,9 +169,68 @@ function App() {
           <span className="validity"></span>
         </div>
 
-        <div>
-          visibility
-          <input value={visibility} onChange={(event) => setVisibility(event.target.value)} />
+        <div className="form-field">
+          <fieldset>
+            <legend>visibility:</legend>
+
+            <div>
+              <input
+                type="radio"
+                id="great"
+                name="visibility"
+                value="great"
+                required
+                checked={visibility === 'great'}
+                onChange={(event) => setVisibility(event.target.value)}
+              />
+
+              <label htmlFor="great">great</label>
+            </div>
+
+            <div>
+              <input
+                type="radio"
+                id="good"
+                name="visibility"
+                value="good"
+                required
+                checked={visibility === 'good'}
+                onChange={(event) => setVisibility(event.target.value)}
+              />
+
+              <label htmlFor="good">good</label>
+            </div>
+
+            <div>
+              <input
+                type="radio"
+                id="ok"
+                name="visibility"
+                value="ok"
+                required
+                checked={visibility === 'ok'}
+                onChange={(event) => setVisibility(event.target.value)}
+              />
+
+              <label htmlFor="ok">ok</label>
+            </div>
+
+            <div>
+              <input
+                type="radio"
+                id="poor"
+                name="visibility"
+                value="poor"
+                required
+                checked={visibility === 'poor'}
+                onChange={(event) => setVisibility(event.target.value)}
+              />
+
+              <label htmlFor="poor">poor</label>
+            </div>
+          </fieldset>
+
+          <span className="validity"></span>
         </div>
 
         <div>
