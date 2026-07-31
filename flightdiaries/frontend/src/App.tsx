@@ -6,10 +6,14 @@ import type { DiaryEntry, NewDiaryEntry, Weather, Visibility, ValidationError } 
 
 import diaryService from './services/diaries';
 
+function getTodayDate() {
+  return new Date().toISOString().slice(0, 10);
+}
+
 function App() {
   const [diaries, setDiaries] = useState<DiaryEntry[]>([]);
 
-  const [date, setDate] = useState('');
+  const [date, setDate] = useState(() => getTodayDate());
   const [weather, setWeather] = useState('');
   const [visibility, setVisibility] = useState('');
   const [comment, setComment] = useState('');
@@ -75,7 +79,7 @@ function App() {
             type="date"
             name="trip-start"
             id='date'
-            value="2026-07-31"
+            value={date}
             onChange={(event) => setDate(event.target.value)}
             min="1900-01-01"
             max="2026-12-31" />
