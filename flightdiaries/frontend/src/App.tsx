@@ -1,11 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import type { SyntheticEvent } from 'react';
 
-import { getErrorMessage } from './utils';
-
-import type { DiaryEntry, NewDiaryEntry, Weather, Visibility } from './types';
-
-import diaryService from './services/diaries';
-
+import type { NewDiaryEntry, Weather, Visibility } from './types';
+import { useDiaries } from './hooks/useDiaries';
 
 import './index.css'
 
@@ -14,24 +11,14 @@ function getTodayDate() {
 }
 
 function App() {
-  const [diaries, setDiaries] = useState<DiaryEntry[]>([]);
+  const { diaries, errorMessage, createDiary } = useDiaries();
 
   const [date, setDate] = useState('');
   const [weather, setWeather] = useState('');
   const [visibility, setVisibility] = useState('');
   const [comment, setComment] = useState('');
 
-  const [errorMessage, setErrorMessage] = useState('');
-
-  useEffect(() => {
-    diaryService
-      .getAll()
-      .then(data => {
-        setDiaries(data);
-      });
-  }, []);
-
-  const addDiary = (event: React.SyntheticEvent) => {
+  const addDiary = (event: SyntheticEvent) => {
     event.preventDefault();
 
     const newEntry: NewDiaryEntry = {
@@ -41,19 +28,12 @@ function App() {
       comment,
     };
 
-    diaryService
-      .create(newEntry)
-      .then(returnedEntry => {
-        setDiaries(diaries.concat(returnedEntry));
-        setDate('');
-        setWeather('');
-        setVisibility('');
-        setComment('');
-      })
-      .catch(error => {
-        setErrorMessage(getErrorMessage(error));
-        setTimeout(() => setErrorMessage(''), 5000);
-      });
+    createDiary(newEntry).then(() => {
+      setDate('');
+      setWeather('');
+      setVisibility('');
+      setComment('');
+    });
   };
 
   return (
