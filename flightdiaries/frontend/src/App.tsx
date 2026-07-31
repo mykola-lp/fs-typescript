@@ -15,7 +15,7 @@ function getTodayDate() {
 function App() {
   const [diaries, setDiaries] = useState<DiaryEntry[]>([]);
 
-  const [date, setDate] = useState(() => getTodayDate());
+  const [date, setDate] = useState('');
   const [weather, setWeather] = useState('');
   const [visibility, setVisibility] = useState('');
   const [comment, setComment] = useState('');
