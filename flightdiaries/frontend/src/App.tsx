@@ -45,10 +45,19 @@ function App() {
       })
       .catch(error => {
         if (axios.isAxiosError(error)) {
-          setErrorMessage(error.response?.data?.error ?? 'Something went wrong');
+          const zodErrors = error.response?.data?.error;
+
+          if (Array.isArray(zodErrors) && zodErrors.length > 0) {
+            const messages = zodErrors.map((issue: { message: string }) => issue.message).join(', ');
+            setErrorMessage(`Error: ${messages}`);
+          } else {
+            setErrorMessage('Something went wrong');
+          }
         } else {
           setErrorMessage('An unexpected error occurred');
         }
+
+        setTimeout(() => setErrorMessage(''), 5000);
       });
   };
 
