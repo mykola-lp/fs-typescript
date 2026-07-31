@@ -18,6 +18,14 @@ function App() {
   return (
     <div>
       <h1>Flight diaries</h1>
+
+      <ul>
+        {diaries.map((diary) => (
+          <li key={diary.id}>
+            {diary.date} {diary.weather} {diary.visibility}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
