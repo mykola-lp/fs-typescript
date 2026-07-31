@@ -13,6 +13,8 @@ function App() {
   const [visibility, setVisibility] = useState('');
   const [comment, setComment] = useState('');
 
+  const [errorMessage, setErrorMessage] = useState('');
+
   useEffect(() => {
     diaryService
       .getAll()
