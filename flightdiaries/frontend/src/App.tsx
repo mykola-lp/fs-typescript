@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import type { SyntheticEvent } from 'react';
 
+import Heading from './components/Heading';
+
 import type { NewDiaryEntry, Weather, Visibility } from './types';
 import { useDiaries } from './hooks/useDiaries';
 
@@ -38,9 +40,9 @@ function App() {
 
   return (
     <div>
-      <h1>Flight diaries</h1>
+      <Heading level={1} text="Flight diaries" />
 
-      <h2>Add new entry</h2>
+      <Heading level={2} text="Add new entry" />
 
       {errorMessage && (
         <div className="error-message">{errorMessage}</div>
@@ -224,7 +226,7 @@ function App() {
         <button type="submit">add</button>
       </form>
 
-      <h2>Diary entries</h2>
+      <Heading level={2} text="Diary entries" />
 
       <ul>
         {diaries.map((diary) => (
