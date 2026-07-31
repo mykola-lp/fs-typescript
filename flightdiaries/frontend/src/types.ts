@@ -26,3 +26,10 @@ export interface DiaryEntry {
 }
 
 export type NonSensitiveDiaryEntry = Omit<DiaryEntry, 'comment'>;
+
+export interface NewDiaryEntry {
+  date: string;
+  weather: Weather;
+  visibility: Visibility;
+  comment?: string;
+}
