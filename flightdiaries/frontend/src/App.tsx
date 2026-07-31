@@ -69,8 +69,16 @@ function App() {
 
       <form onSubmit={addDiary}>
         <div>
-          date
-          <input value={date} onChange={(event) => setDate(event.target.value)} />
+          <label htmlFor="date">date:</label>
+
+          <input
+            type="date"
+            name="trip-start"
+            id='date'
+            value="2026-07-31"
+            onChange={(event) => setDate(event.target.value)}
+            min="1900-01-01"
+            max="2026-12-31" />
         </div>
 
         <div>
