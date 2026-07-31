@@ -74,15 +74,15 @@ function App() {
       <form onSubmit={addDiary}>
         <div>
           <label htmlFor="date">date:</label>
-
           <input
             type="date"
-            name="trip-start"
-            id='date'
+            id="date"
+            name="date"
             value={date}
             onChange={(event) => setDate(event.target.value)}
             min="1900-01-01"
-            max="2026-12-31" />
+            max={getTodayDate()}
+          />
         </div>
 
         <div>
