@@ -56,6 +56,8 @@ function App() {
     <div>
       <h1>Flight diaries</h1>
 
+      {errorMessage && <div style={{ color: 'red' }}>{errorMessage}</div>}
+
       <form onSubmit={addDiary}>
         <div>
           date
