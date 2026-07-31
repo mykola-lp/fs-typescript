@@ -71,6 +71,8 @@ function App() {
     <div>
       <h1>Flight diaries</h1>
 
+      <h2>Add new entry</h2>
+
       {errorMessage && <div style={{ color: 'red' }}>{errorMessage}</div>}
 
       <form onSubmit={addDiary}>
@@ -251,11 +253,18 @@ function App() {
         <button type="submit">add</button>
       </form>
 
+      <h2>Diary entries</h2>
+
       <ul>
         {diaries.map((diary) => (
           <li key={diary.id}>
-            {diary.date} {diary.weather} {diary.visibility}
-            {diary.comment && <> — {diary.comment}</>}
+            <div className="diary-entry-header">
+              <strong className="diary-date">{diary.date}</strong>
+              <span className="diary-weather">{diary.weather}</span>
+              <span className="diary-visibility">{diary.visibility}</span>
+            </div>
+
+            {diary.comment && <p className="diary-entry-comment">{diary.comment}</p>}
           </li>
         ))}
       </ul>

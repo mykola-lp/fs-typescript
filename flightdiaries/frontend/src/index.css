@@ -14,6 +14,15 @@ form {
   padding-left: 5px;
 }
 
+ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 400px;
+}
+
 button {
   align-self: flex-start;
   width: fit-content;
@@ -76,4 +85,37 @@ fieldset:has(input:valid) + .validity::after {
 
 fieldset:has(input:invalid) + .validity::after {
   content: "✖";
+}
+
+/* ---  print result --- */
+.diary-entry-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 6px;
+}
+
+.diary-entry-comment {
+  margin: 0;
+  color: #555;
+  font-style: italic;
+  line-height: 1.4;
+
+  padding: 12px 16px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background-color: #fafafa;
+}
+
+.diary-date {
+  color: #222;
+}
+
+.diary-weather,
+.diary-visibility {
+  padding: 2px 8px;
+  border-radius: 12px;
+  background-color: #e8e8e8;
+  font-size: 0.85rem;
+  font-weight: 500;
 }
