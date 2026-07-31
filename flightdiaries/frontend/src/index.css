@@ -123,7 +123,16 @@ fieldset:has(input:invalid) + .validity::after {
 .diary-visibility {
   padding: 2px 8px;
   border-radius: 12px;
-  background-color: #e8e8e8;
   font-size: 0.85rem;
   font-weight: 500;
+}
+
+.diary-weather {
+  background-color: #d6ebff;
+  color: #084c8c;
+}
+
+.diary-visibility {
+  background-color: #e6d6ff;
+  color: #5c1f9c;
 }
