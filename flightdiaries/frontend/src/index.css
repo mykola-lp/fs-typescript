@@ -1,11 +1,33 @@
+/* --- globals --- */
+html {
+  font-family: sans-serif;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+  gap: 12px;
+}
+
+.validity::after {
+  padding-left: 5px;
+}
+
+/* --- form fields --- */
+.form-field {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
 label {
   display: flex;
   align-items: center;
 }
 
-span::after {
-  padding-left: 5px;
-}
+/* --- validity icons --- */
 
 input:invalid + span::after {
   content: "✖";
@@ -13,4 +35,33 @@ input:invalid + span::after {
 
 input:valid + span::after {
   content: "✓";
+}
+
+/* --- weather radio group --- */
+fieldset {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 8px 12px;
+}
+
+legend {
+  padding: 0 6px;
+  font-weight: 600;
+}
+
+fieldset div {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+fieldset:has(input:valid) + .validity::after {
+  content: "✓";
+}
+
+fieldset:has(input:invalid) + .validity::after {
+  content: "✖";
 }

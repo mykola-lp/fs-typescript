@@ -74,7 +74,7 @@ function App() {
       {errorMessage && <div style={{ color: 'red' }}>{errorMessage}</div>}
 
       <form onSubmit={addDiary}>
-        <div>
+        <div className="form-field">
           <label>
             date:
             <input
@@ -86,73 +86,88 @@ function App() {
               max={getTodayDate()}
               required
             />
+
             <span className="validity"></span>
           </label>
         </div>
 
-        <fieldset>
-          <legend>weather:</legend>
+        <div className="form-field">
+          <fieldset>
+            <legend>weather:</legend>
 
-          <div>
-            <input
-              type="radio"
-              id="sunny"
-              name="weather"
-              value="sunny"
-              checked={weather === 'sunny'}
-              onChange={(event) => setWeather(event.target.value)}
-            />
-            <label htmlFor="sunny">sunny</label>
-          </div>
+            <div>
+              <input
+                type="radio"
+                id="sunny"
+                name="weather"
+                value="sunny"
+                required
+                checked={weather === 'sunny'}
+                onChange={(event) => setWeather(event.target.value)}
+              />
 
-          <div>
-            <input
-              type="radio"
-              id="rainy"
-              name="weather"
-              value="rainy"
-              checked={weather === 'rainy'}
-              onChange={(event) => setWeather(event.target.value)}
-            />
-            <label htmlFor="rainy">rainy</label>
-          </div>
+              <label htmlFor="sunny">sunny</label>
+            </div>
 
-          <div>
-            <input
-              type="radio"
-              id="cloudy"
-              name="weather"
-              value="cloudy"
-              checked={weather === 'cloudy'}
-              onChange={(event) => setWeather(event.target.value)}
-            />
-            <label htmlFor="cloudy">cloudy</label>
-          </div>
+            <div>
+              <input
+                type="radio"
+                id="rainy"
+                name="weather"
+                value="rainy"
+                required
+                checked={weather === 'rainy'}
+                onChange={(event) => setWeather(event.target.value)}
+              />
 
-          <div>
-            <input
-              type="radio"
-              id="stormy"
-              name="weather"
-              value="stormy"
-              checked={weather === 'stormy'}
-              onChange={(event) => setWeather(event.target.value)}
-            />
-            <label htmlFor="stormy">stormy</label>
-          </div>
+              <label htmlFor="rainy">rainy</label>
+            </div>
 
-          <div>
-            <input
-              type="radio"
-              id="windy"
-              name="weather"
-              value="windy"
-              checked={weather === 'windy'}
-              onChange={(event) => setWeather(event.target.value)}
-            />
-            <label htmlFor="windy">windy</label>
-          </div>
-        </fieldset>
+            <div>
+              <input
+                type="radio"
+                id="cloudy"
+                name="weather"
+                value="cloudy"
+                required
+                checked={weather === 'cloudy'}
+                onChange={(event) => setWeather(event.target.value)}
+              />
+
+              <label htmlFor="cloudy">cloudy</label>
+            </div>
+
+            <div>
+              <input
+                type="radio"
+                id="stormy"
+                name="weather"
+                value="stormy"
+                required
+                checked={weather === 'stormy'}
+                onChange={(event) => setWeather(event.target.value)}
+              />
+
+              <label htmlFor="stormy">stormy</label>
+            </div>
+
+            <div>
+              <input
+                type="radio"
+                id="windy"
+                name="weather"
+                value="windy"
+                required
+                checked={weather === 'windy'}
+                onChange={(event) => setWeather(event.target.value)}
+              />
+
+              <label htmlFor="windy">windy</label>
+            </div>
+          </fieldset>
+
+          <span className="validity"></span>
+        </div>
 
         <div>
           visibility
