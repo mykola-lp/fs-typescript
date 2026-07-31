@@ -14,4 +14,10 @@ You can decide how the diary entries are rendered. Note that the backend API doe
 
 ### Exercise 20: Flight diaries, step2
 
-Make it possible to add new diary entries from the frontend. In this exercise you may skip all validations and assume that the user just enters the data in a correct form
+Make it possible to add new diary entries from the frontend. In this exercise you may skip all validations and assume that the user just enters the data in a correct form.
+
+### Exercise 21: Flight diaries, step3
+
+Notify the user if the the creation of a diary entry fails in the backend, show also the reason for the failure.
+
+See eg. [this](https://dev.to/mdmostafizurrahaman/handle-axios-error-in-typescript-4mf9) to see how you can narrow the Axios error so that you can get hold of the error message.
