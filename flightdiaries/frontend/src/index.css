@@ -59,11 +59,11 @@ label {
   gap: 8px;
 }
 
-input:invalid + span::after {
+input:invalid + .validity::after {
   content: "✖";
 }
 
-input:valid + span::after {
+input:valid + .validity::after {
   content: "✓";
 }
 
