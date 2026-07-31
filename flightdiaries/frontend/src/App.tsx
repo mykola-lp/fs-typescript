@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import axios from 'axios';
 
-import type { DiaryEntry, NewDiaryEntry, Weather, Visibility } from './types';
+import type { DiaryEntry, NewDiaryEntry, Weather, Visibility, ValidationError } from './types';
 
 import diaryService from './services/diaries';
 
@@ -45,7 +45,7 @@ function App() {
       })
       .catch(error => {
         if (axios.isAxiosError(error)) {
-          const zodErrors = error.response?.data?.error;
+          const zodErrors = (error.response?.data as ValidationError)?.error;
 
           if (Array.isArray(zodErrors) && zodErrors.length > 0) {
             const messages = zodErrors.map((issue: { message: string }) => issue.message).join(', ');
