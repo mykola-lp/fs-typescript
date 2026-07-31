@@ -1,12 +1,12 @@
 import axios from 'axios';
 
-import type { NonSensitiveDiaryEntry, DiaryEntry, NewDiaryEntry } from '../types';
+import type { DiaryEntry, NewDiaryEntry } from '../types';
 
 const baseUrl = 'http://localhost:3000/api/diaries';
 
 const getAll = () => {
   return axios
-    .get<NonSensitiveDiaryEntry[]>(baseUrl)
+    .get<DiaryEntry[]>(baseUrl)
     .then(response => response.data);
 };
 
