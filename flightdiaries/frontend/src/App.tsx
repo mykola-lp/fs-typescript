@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import type { SyntheticEvent } from 'react';
+
+import axios from 'axios';
 
 import type { DiaryEntry, NewDiaryEntry, Weather, Visibility } from './types';
 
@@ -23,7 +24,7 @@ function App() {
       });
   }, []);
 
-  const addDiary = (event: SyntheticEvent) => {
+  const addDiary = (event: React.SyntheticEvent) => {
     event.preventDefault();
 
     const newEntry: NewDiaryEntry = {
@@ -37,12 +38,18 @@ function App() {
       .create(newEntry)
       .then(returnedEntry => {
         setDiaries(diaries.concat(returnedEntry));
+        setDate('');
+        setWeather('');
+        setVisibility('');
+        setComment('');
+      })
+      .catch(error => {
+        if (axios.isAxiosError(error)) {
+          setErrorMessage(error.response?.data?.error ?? 'Something went wrong');
+        } else {
+          setErrorMessage('An unexpected error occurred');
+        }
       });
-
-    setDate('');
-    setWeather('');
-    setVisibility('');
-    setComment('');
   };
 
   return (
