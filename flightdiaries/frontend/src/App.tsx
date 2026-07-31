@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 
-import axios from 'axios';
+import { getErrorMessage } from './utils';
 
-import type { DiaryEntry, NewDiaryEntry, Weather, Visibility, ValidationError } from './types';
+import type { DiaryEntry, NewDiaryEntry, Weather, Visibility } from './types';
 
 import diaryService from './services/diaries';
+
 
 import './index.css'
 
@@ -50,21 +51,7 @@ function App() {
         setComment('');
       })
       .catch(error => {
-        if (axios.isAxiosError(error)) {
-          const zodErrors = (error.response?.data as ValidationError)?.error;
-
-          if (Array.isArray(zodErrors) && zodErrors.length > 0) {
-            const messages = zodErrors
-              .map((issue) => `${issue.path.join('.')}: ${issue.message}`)
-              .join(', ');
-            setErrorMessage(`Error: ${messages}`);
-          } else {
-            setErrorMessage('Something went wrong');
-          }
-        } else {
-          setErrorMessage('An unexpected error occurred');
-        }
-
+        setErrorMessage(getErrorMessage(error));
         setTimeout(() => setErrorMessage(''), 5000);
       });
   };
