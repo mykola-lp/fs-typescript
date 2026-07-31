@@ -95,6 +95,35 @@ function App() {
           <input value={weather} onChange={(event) => setWeather(event.target.value)} />
         </div>
 
+        <fieldset>
+          <legend>weather:</legend>
+
+          <div>
+            <input type="radio" id="sunny" name="weather" value="sunny" />
+            <label htmlFor="sunny">sunny</label>
+          </div>
+
+          <div>
+            <input type="radio" id="rainy" name="weather" value="rainy" />
+            <label htmlFor="rainy">rainy</label>
+          </div>
+
+          <div>
+            <input type="radio" id="cloudy" name="weather" value="cloudy" />
+            <label htmlFor="cloudy">cloudy</label>
+          </div>
+
+          <div>
+            <input type="radio" id="stormy" name="weather" value="stormy" />
+            <label htmlFor="stormy">stormy</label>
+          </div>
+
+          <div>
+            <input type="radio" id="windy" name="weather" value="windy" />
+            <label htmlFor="windy">windy</label>
+          </div>
+        </fieldset>
+
         <div>
           visibility
           <input value={visibility} onChange={(event) => setVisibility(event.target.value)} />
