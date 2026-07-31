@@ -1,104 +1,25 @@
-import { useEffect, useState } from 'react';
+import { useDiaries } from './hooks/useDiaries';
 
-import axios from 'axios';
+import DiaryForm from './components/DiaryForm';
+import DiaryList from './components/DiaryList';
+import Heading from './components/Heading';
 
-import type { DiaryEntry, NewDiaryEntry, Weather, Visibility, ValidationError } from './types';
-
-import diaryService from './services/diaries';
+import './index.css';
 
 function App() {
-  const [diaries, setDiaries] = useState<DiaryEntry[]>([]);
-
-  const [date, setDate] = useState('');
-  const [weather, setWeather] = useState('');
-  const [visibility, setVisibility] = useState('');
-  const [comment, setComment] = useState('');
-
-  const [errorMessage, setErrorMessage] = useState('');
-
-  useEffect(() => {
-    diaryService
-      .getAll()
-      .then(data => {
-        setDiaries(data);
-      });
-  }, []);
-
-  const addDiary = (event: React.SyntheticEvent) => {
-    event.preventDefault();
-
-    const newEntry: NewDiaryEntry = {
-      date,
-      weather: weather as Weather,
-      visibility: visibility as Visibility,
-      comment,
-    };
-
-    diaryService
-      .create(newEntry)
-      .then(returnedEntry => {
-        setDiaries(diaries.concat(returnedEntry));
-        setDate('');
-        setWeather('');
-        setVisibility('');
-        setComment('');
-      })
-      .catch(error => {
-        if (axios.isAxiosError(error)) {
-          const zodErrors = (error.response?.data as ValidationError)?.error;
-
-          if (Array.isArray(zodErrors) && zodErrors.length > 0) {
-            const messages = zodErrors.map((issue: { message: string }) => issue.message).join(', ');
-            setErrorMessage(`Error: ${messages}`);
-          } else {
-            setErrorMessage('Something went wrong');
-          }
-        } else {
-          setErrorMessage('An unexpected error occurred');
-        }
-
-        setTimeout(() => setErrorMessage(''), 5000);
-      });
-  };
+  const { diaries, errorMessage, createDiary } = useDiaries();
 
   return (
     <div>
-      <h1>Flight diaries</h1>
+      <Heading level={1} text="Flight diaries" />
+      <Heading level={2} text="Add new entry" />
 
-      {errorMessage && <div style={{ color: 'red' }}>{errorMessage}</div>}
+      {errorMessage && <div className="error-message">{errorMessage}</div>}
 
-      <form onSubmit={addDiary}>
-        <div>
-          date
-          <input value={date} onChange={(event) => setDate(event.target.value)} />
-        </div>
+      <DiaryForm onCreate={createDiary} />
 
-        <div>
-          weather
-          <input value={weather} onChange={(event) => setWeather(event.target.value)} />
-        </div>
-
-        <div>
-          visibility
-          <input value={visibility} onChange={(event) => setVisibility(event.target.value)} />
-        </div>
-
-        <div>
-          comment
-          <input value={comment} onChange={(event) => setComment(event.target.value)} />
-        </div>
-
-        <button type="submit">add</button>
-      </form>
-
-      <ul>
-        {diaries.map((diary) => (
-          <li key={diary.id}>
-            {diary.date} {diary.weather} {diary.visibility}
-            {diary.comment && <> — {diary.comment}</>}
-          </li>
-        ))}
-      </ul>
+      <Heading level={2} text="Diary entries" />
+      <DiaryList diaries={diaries} />
     </div>
   );
 }

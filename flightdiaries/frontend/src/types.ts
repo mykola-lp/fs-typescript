@@ -17,6 +17,9 @@ export const Visibility = {
 
 export type Visibility = typeof Visibility[keyof typeof Visibility];
 
+export const weatherOptions: Weather[] = Object.values(Weather);
+export const visibilityOptions: Visibility[] = Object.values(Visibility);
+
 export interface DiaryEntry {
   id: number;
   date: string;
@@ -30,5 +33,8 @@ export type NonSensitiveDiaryEntry = Omit<DiaryEntry, 'comment'>;
 export type NewDiaryEntry = Omit<DiaryEntry, 'id'>;
 
 export interface ValidationError {
-  error: { message: string }[];
+  error: {
+    message: string;
+    path: string[];
+  }[];
 }

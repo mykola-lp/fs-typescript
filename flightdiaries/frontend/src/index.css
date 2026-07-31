@@ -1,0 +1,138 @@
+/* --- globals --- */
+html {
+  font-family: sans-serif;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+  gap: 12px;
+}
+
+.validity::after {
+  padding-left: 5px;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 400px;
+}
+
+button {
+  align-self: flex-start;
+  width: fit-content;
+  padding: 5px 15px;
+  border: 1px solid #333;
+  border-radius: 4px;
+  background-color: #f5f5f5;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #e0e0e0;
+}
+
+.error-message {
+  margin: 12px 0;
+  padding: 10px 14px;
+  border-radius: 6px;
+  background-color: #f2f2f2;
+  color: #c0392b;
+}
+
+/* --- form fields --- */
+.form-field {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+input:invalid + .validity::after {
+  content: "✖";
+}
+
+input:valid + .validity::after {
+  content: "✓";
+}
+
+/* --- weather radio group --- */
+fieldset {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 8px 12px;
+}
+
+legend {
+  padding: 0 6px;
+}
+
+fieldset div {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+fieldset:has(input:valid) + .validity::after {
+  content: "✓";
+}
+
+fieldset:has(input:invalid) + .validity::after {
+  content: "✖";
+}
+
+/* ---  print result --- */
+.diary-entry-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 6px;
+}
+
+.diary-entry-comment {
+  margin: 0;
+  color: #555;
+  font-style: italic;
+  line-height: 1.4;
+
+  padding: 12px 16px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background-color: #fafafa;
+}
+
+.diary-date {
+  color: #222;
+}
+
+.diary-weather,
+.diary-visibility {
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.diary-weather {
+  background-color: #d6ebff;
+  color: #084c8c;
+}
+
+.diary-visibility {
+  background-color: #e6d6ff;
+  color: #5c1f9c;
+}

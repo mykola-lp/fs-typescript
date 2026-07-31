@@ -21,3 +21,11 @@ Make it possible to add new diary entries from the frontend. In this exercise yo
 Notify the user if the the creation of a diary entry fails in the backend, show also the reason for the failure.
 
 See eg. [this](https://dev.to/mdmostafizurrahaman/handle-axios-error-in-typescript-4mf9) to see how you can narrow the Axios error so that you can get hold of the error message.
+
+### Exercise 22: Flight diaries, step4
+
+Addition of a diary entry is now very error prone since user can type anything to the input fields. The situation must be improved.
+
+Modify the input form so that the date is set with a HTML [date](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/date) input element, and the weather and visibility are set with HTML radio [buttons](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/radio). We have already used radio buttons in part 6, that material may or may not be useful...
+
+Your app should always stay well-typed, with no ESLint errors and no ESLint rules ignored.
