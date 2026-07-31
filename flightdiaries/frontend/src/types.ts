@@ -17,6 +17,9 @@ export const Visibility = {
 
 export type Visibility = typeof Visibility[keyof typeof Visibility];
 
+export const weatherOptions: Weather[] = Object.values(Weather);
+export const visibilityOptions: Visibility[] = Object.values(Visibility);
+
 export interface DiaryEntry {
   id: number;
   date: string;
