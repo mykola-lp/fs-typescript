@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
-import type { SyntheticEvent } from 'react';
 
-import type { DiaryEntry, NewDiaryEntry, Weather, Visibility } from './types';
+import axios from 'axios';
+
+import type { DiaryEntry, NewDiaryEntry, Weather, Visibility, ValidationError } from './types';
 
 import diaryService from './services/diaries';
 
@@ -13,6 +14,8 @@ function App() {
   const [visibility, setVisibility] = useState('');
   const [comment, setComment] = useState('');
 
+  const [errorMessage, setErrorMessage] = useState('');
+
   useEffect(() => {
     diaryService
       .getAll()
@@ -21,7 +24,7 @@ function App() {
       });
   }, []);
 
-  const addDiary = (event: SyntheticEvent) => {
+  const addDiary = (event: React.SyntheticEvent) => {
     event.preventDefault();
 
     const newEntry: NewDiaryEntry = {
@@ -35,17 +38,34 @@ function App() {
       .create(newEntry)
       .then(returnedEntry => {
         setDiaries(diaries.concat(returnedEntry));
-      });
+        setDate('');
+        setWeather('');
+        setVisibility('');
+        setComment('');
+      })
+      .catch(error => {
+        if (axios.isAxiosError(error)) {
+          const zodErrors = (error.response?.data as ValidationError)?.error;
 
-    setDate('');
-    setWeather('');
-    setVisibility('');
-    setComment('');
+          if (Array.isArray(zodErrors) && zodErrors.length > 0) {
+            const messages = zodErrors.map((issue: { message: string }) => issue.message).join(', ');
+            setErrorMessage(`Error: ${messages}`);
+          } else {
+            setErrorMessage('Something went wrong');
+          }
+        } else {
+          setErrorMessage('An unexpected error occurred');
+        }
+
+        setTimeout(() => setErrorMessage(''), 5000);
+      });
   };
 
   return (
     <div>
       <h1>Flight diaries</h1>
+
+      {errorMessage && <div style={{ color: 'red' }}>{errorMessage}</div>}
 
       <form onSubmit={addDiary}>
         <div>
