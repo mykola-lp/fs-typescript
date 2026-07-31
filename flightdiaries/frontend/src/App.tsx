@@ -90,36 +90,66 @@ function App() {
           </label>
         </div>
 
-        <div>
-          weather
-          <input value={weather} onChange={(event) => setWeather(event.target.value)} />
-        </div>
-
         <fieldset>
           <legend>weather:</legend>
 
           <div>
-            <input type="radio" id="sunny" name="weather" value="sunny" />
+            <input
+              type="radio"
+              id="sunny"
+              name="weather"
+              value="sunny"
+              checked={weather === 'sunny'}
+              onChange={(event) => setWeather(event.target.value)}
+            />
             <label htmlFor="sunny">sunny</label>
           </div>
 
           <div>
-            <input type="radio" id="rainy" name="weather" value="rainy" />
+            <input
+              type="radio"
+              id="rainy"
+              name="weather"
+              value="rainy"
+              checked={weather === 'rainy'}
+              onChange={(event) => setWeather(event.target.value)}
+            />
             <label htmlFor="rainy">rainy</label>
           </div>
 
           <div>
-            <input type="radio" id="cloudy" name="weather" value="cloudy" />
+            <input
+              type="radio"
+              id="cloudy"
+              name="weather"
+              value="cloudy"
+              checked={weather === 'cloudy'}
+              onChange={(event) => setWeather(event.target.value)}
+            />
             <label htmlFor="cloudy">cloudy</label>
           </div>
 
           <div>
-            <input type="radio" id="stormy" name="weather" value="stormy" />
+            <input
+              type="radio"
+              id="stormy"
+              name="weather"
+              value="stormy"
+              checked={weather === 'stormy'}
+              onChange={(event) => setWeather(event.target.value)}
+            />
             <label htmlFor="stormy">stormy</label>
           </div>
 
           <div>
-            <input type="radio" id="windy" name="weather" value="windy" />
+            <input
+              type="radio"
+              id="windy"
+              name="weather"
+              value="windy"
+              checked={weather === 'windy'}
+              onChange={(event) => setWeather(event.target.value)}
+            />
             <label htmlFor="windy">windy</label>
           </div>
         </fieldset>
