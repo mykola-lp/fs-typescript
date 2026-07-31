@@ -39,6 +39,7 @@ button:hover {
 label {
   display: flex;
   align-items: center;
+  gap: 8px;
 }
 
 input:invalid + span::after {
@@ -61,7 +62,6 @@ fieldset {
 
 legend {
   padding: 0 6px;
-  font-weight: 600;
 }
 
 fieldset div {

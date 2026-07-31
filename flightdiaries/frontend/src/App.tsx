@@ -233,9 +233,19 @@ function App() {
           <span className="validity"></span>
         </div>
 
-        <div>
-          comment
-          <input value={comment} onChange={(event) => setComment(event.target.value)} />
+        <div className="form-field">
+          <label htmlFor="comment">comment:</label>
+
+          <textarea
+            id="comment"
+            name="comment"
+            value={comment}
+            onChange={(event) => setComment(event.target.value)}
+            rows={2}
+            maxLength={100}
+          />
+
+          <span className="validity"></span>
         </div>
 
         <button type="submit">add</button>
