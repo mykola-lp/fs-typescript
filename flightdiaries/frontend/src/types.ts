@@ -30,5 +30,8 @@ export type NonSensitiveDiaryEntry = Omit<DiaryEntry, 'comment'>;
 export type NewDiaryEntry = Omit<DiaryEntry, 'id'>;
 
 export interface ValidationError {
-  error: { message: string }[];
+  error: {
+    message: string;
+    path: string[];
+  }[];
 }

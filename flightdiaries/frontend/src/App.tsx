@@ -54,7 +54,9 @@ function App() {
           const zodErrors = (error.response?.data as ValidationError)?.error;
 
           if (Array.isArray(zodErrors) && zodErrors.length > 0) {
-            const messages = zodErrors.map((issue: { message: string }) => issue.message).join(', ');
+            const messages = zodErrors
+              .map((issue) => `${issue.path.join('.')}: ${issue.message}`)
+              .join(', ');
             setErrorMessage(`Error: ${messages}`);
           } else {
             setErrorMessage('Something went wrong');
@@ -73,7 +75,9 @@ function App() {
 
       <h2>Add new entry</h2>
 
-      {errorMessage && <div style={{ color: 'red' }}>{errorMessage}</div>}
+      {errorMessage && (
+        <div className="error-message">{errorMessage}</div>
+      )}
 
       <form onSubmit={addDiary}>
         <div className="form-field">
@@ -86,7 +90,7 @@ function App() {
               onChange={(event) => setDate(event.target.value)}
               min="1900-01-01"
               max={getTodayDate()}
-              required
+              // required // disabled to demonstrate backend validation error handling
             />
 
             <span className="validity"></span>
