@@ -43,7 +43,8 @@ const PatientPage = () => {
           marginTop: "1em",
           display: "flex",
           alignItems: "center",
-          gap: "8px"
+          gap: "8px",
+          fontWeight: "bold"
         }}
       >
         {patient.name} {genderIcon[patient.gender]}
@@ -51,9 +52,27 @@ const PatientPage = () => {
 
       <Typography>ssn: {patient.ssn}</Typography>
 
-      <Typography>gender: {patient.gender}</Typography>
-
       <Typography>occupation: {patient.occupation}</Typography>
+
+      <Typography variant="h6" sx={{ marginTop: "1em", fontWeight: "bold" }}>
+        entries
+      </Typography>
+
+      {patient.entries.map((entry) => (
+        <div key={entry.id} style={{ marginTop: "0.5em" }}>
+          <Typography>
+            {entry.date} <em>{entry.description}</em>
+          </Typography>
+
+          {entry.diagnosisCodes && (
+            <ul>
+              {entry.diagnosisCodes.map((code) => (
+                <li key={code}>{code}</li>
+              ))}
+            </ul>
+          )}
+        </div>
+      ))}
     </div>
   );
 };
