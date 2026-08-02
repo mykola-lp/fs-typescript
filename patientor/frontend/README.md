@@ -59,3 +59,7 @@ Ensure that your backend returns the entries properly when you go to an individu
 Extend a patient's page in the frontend to list the date, description and diagnoseCodes of the patient's entries.
 
 You can use the same type definition for an Entry in the frontend. For these exercises, it is enough to just copy/paste the definitions from the backend to the frontend.
+
+### Exercise 27: Patientor, step5
+
+Fetch and add diagnoses to the application state from the /api/diagnoses endpoint. Use the new diagnosis data to show the descriptions for patients' diagnosis codes.
