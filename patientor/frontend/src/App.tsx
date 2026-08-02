@@ -17,7 +17,7 @@ import diagnosisService from "./services/diagnoses";
 
 const App = () => {
   const [patients, setPatients] = useState<Patient[]>([]);
-   const [diagnoses, setDiagnoses] = useState<Diagnosis[]>([]);
+  const [diagnoses, setDiagnoses] = useState<Diagnosis[]>([]);
 
   useEffect(() => {
     void axios.get<void>(`${apiBaseUrl}/ping`);
