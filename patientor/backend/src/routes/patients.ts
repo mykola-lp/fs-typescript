@@ -1,10 +1,8 @@
 import express, { type Request, type Response } from 'express';
 
 import { newPatientParser, newEntryParser, errorMiddleware } from '../middleware.ts';
-
-import { type NonSensitivePatient, type Patient, type NewPatient, type Entry, type EntryWithoutId } from '../types.ts';
-
 import patientService from '../services/patientService.ts';
+import { type NonSensitivePatient, type Patient, type NewPatient, type Entry, type EntryWithoutId } from '../types.ts';
 
 const router = express.Router();
 
