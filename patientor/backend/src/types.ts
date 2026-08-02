@@ -36,3 +36,12 @@ export interface Patient extends NewPatient {
 }
 
 export type NonSensitivePatient = Omit<Patient, 'ssn' | 'entries'>;
+
+interface BaseEntry {
+  id: string;
+  description: string;
+  date: string;
+  specialist: string;
+  // diagnosisCodes?: Diagnosis['code'][];
+  diagnosisCodes?: Array<Diagnosis['code']>;
+}
