@@ -45,3 +45,17 @@ interface BaseEntry {
   // diagnosisCodes?: Diagnosis['code'][];
   diagnosisCodes?: Array<Diagnosis['code']>;
 }
+
+const HealthCheckRating = {
+  Healthy: 0,
+  LowRisk: 1,
+  HighRisk: 2,
+  CriticalRisk: 3,
+} as const;
+
+type HealthCheckRating = typeof HealthCheckRating[keyof typeof HealthCheckRating];
+
+interface HealthCheckEntry extends BaseEntry {
+  type: "HealthCheck";
+  healthCheckRating: HealthCheckRating;
+}
