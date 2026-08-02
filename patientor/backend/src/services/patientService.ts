@@ -21,14 +21,20 @@ const addPatient = (patient: NewPatient): Patient => {
   const newPatient: Patient = {
     id: uuid(),
     ...patient,
+    entries: [],
   };
 
   patients.push(newPatient);
   return newPatient;
 };
 
+const findById = (id: string): Patient | undefined => {
+  return patients.find(p => p.id === id);
+};
+
 export default {
   getPatients,
   getNonSensitiveEntries,
-  addPatient
+  addPatient,
+  findById
 };
