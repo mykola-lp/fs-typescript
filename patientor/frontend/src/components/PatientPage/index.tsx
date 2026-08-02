@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-import { Typography } from '@mui/material';
+import { Typography, Button } from '@mui/material';
 
 import MaleIcon from '@mui/icons-material/Male';
 import FemaleIcon from '@mui/icons-material/Female';
 import TransgenderIcon from '@mui/icons-material/Transgender';
+
+import EntryDetails from "./EntryDetails";
 
 import { Gender, type Patient, type Diagnosis } from "../../types";
 
@@ -68,10 +70,16 @@ const PatientPage = ({ diagnoses }: Props) => {
       </Typography>
 
       {patient.entries.map((entry) => (
-        <div key={entry.id} style={{ marginTop: "0.5em" }}>
-          <Typography>
-            {entry.date} <em>{entry.description}</em>
-          </Typography>
+        <div
+          key={entry.id}
+          style={{
+            border: "1px solid #ccc",
+            borderRadius: "6px",
+            padding: "0.5em 1em",
+            marginTop: "1em"
+          }}
+        >
+          <EntryDetails entry={entry} />
 
           {entry.diagnosisCodes && (
             <ul>
@@ -84,6 +92,10 @@ const PatientPage = ({ diagnoses }: Props) => {
           )}
         </div>
       ))}
+
+      <Button variant="contained" sx={{ marginTop: "1em" }}>
+        Add New Entry
+      </Button>
     </div>
   );
 };
