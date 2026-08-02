@@ -53,3 +53,9 @@ Define the types `OccupationalHealthcareEntry` and `HospitalEntry` so that they 
 Ensure that your backend returns the entries properly when you go to an individual patient's route.
 
 > Use types properly in the backend!
+
+### Exercise 26: Patientor, step4
+
+Extend a patient's page in the frontend to list the date, description and diagnoseCodes of the patient's entries.
+
+You can use the same type definition for an Entry in the frontend. For these exercises, it is enough to just copy/paste the definitions from the backend to the frontend.
