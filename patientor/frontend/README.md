@@ -6,7 +6,7 @@
 
 ## Exercises
 
-### Exercise 23: Patientor, step1
+### Exercise 23: Patientor, step1 (be)
 
 We will soon add a new type for our app, Entry, which represents a lightweight patient journal entry. It consists of a journal text, i.e. a description, a creation date, information regarding the specialist who created it and possible diagnosis codes. Diagnosis codes map to the ICD-10 codes returned from the `/api/diagnoses` endpoint. Our naive implementation will be that a patient has an array of entries.
 
@@ -45,3 +45,11 @@ You may use [MaterialUI](https://material-ui.com/) for the new components but th
 You might want to have a look at [part 7](https://fullstackopen.com/en/part7/react_router) if you don't yet have a grasp on how the [React Router](https://reactrouter.com/en/main/start/tutorial) works.
 
 > The example uses [Material UI Icons](https://mui.com/components/material-icons/) to represent genders.
+
+### Exercise 25: Patientor, step3 (be)
+
+Define the types `OccupationalHealthcareEntry` and `HospitalEntry` so that they conform to the new example data.
+
+Ensure that your backend returns the entries properly when you go to an individual patient's route.
+
+> Use types properly in the backend!
