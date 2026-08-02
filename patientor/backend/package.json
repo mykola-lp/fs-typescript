@@ -26,6 +26,7 @@
     "typescript-eslint": "^8.65.0"
   },
   "dependencies": {
+    "@mui/icons-material": "^9.2.0",
     "cors": "^2.8.6",
     "express": "^5.2.1",
     "uuid": "^14.0.1",
