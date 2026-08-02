@@ -29,9 +29,9 @@ const PatientPage = () => {
         {patient.name}
       </Typography>
 
-      <Typography>gender: {patient.gender}</Typography>
-
       <Typography>ssn: {patient.ssn}</Typography>
+
+      <Typography>gender: {patient.gender}</Typography>
 
       <Typography>occupation: {patient.occupation}</Typography>
     </div>
