@@ -63,3 +63,26 @@ You can use the same type definition for an Entry in the frontend. For these exe
 ### Exercise 27: Patientor, step5
 
 Fetch and add diagnoses to the application state from the /api/diagnoses endpoint. Use the new diagnosis data to show the descriptions for patients' diagnosis codes.
+
+### Exercise 28: Patientor, step6
+
+Extend the entry listing on the patient's page to include the Entry's details, with a new component that shows the rest of the information of the patient's entries, distinguishing different types from each other.
+
+You could use eg. [Icons](https://mui.com/components/material-icons/) or some other [Material UI](https://mui.com/) component to get appropriate visuals for your listing.
+
+You should use a switch case-based rendering and exhaustive type checking so that no cases can be forgotten:
+
+```tsx
+const EntryDetails = ({ entry }: { entry: Entry }) => {
+  switch (entry.type) {
+    case "HealthCheck":
+      return <HealthCheckEntry entry={entry} />;
+    case "OccupationalHealthcare":
+      return <OccupationalHealthcareEntry entry={entry} />;
+    case "Hospital":
+      return <HospitalEntry entry={entry} />;
+    default:
+      return assertNever(entry);
+  }
+};
+```
