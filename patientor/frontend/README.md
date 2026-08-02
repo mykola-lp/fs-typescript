@@ -86,3 +86,37 @@ const EntryDetails = ({ entry }: { entry: Entry }) => {
   }
 };
 ```
+
+### Exercise 29: Patientor, step7
+
+We have established that patients can have different kinds of entries. We don't yet have any way of adding entries to patients in our app, so, at the moment, it is pretty useless as an electronic medical record.
+
+Your next task is to add endpoint `/api/patients/:id/entries` to your backend, through which you can POST an entry for a patient.
+
+Remember that we have different kinds of entries in our app, so our backend should support all those types and check that at least all required fields are given for each type.
+
+In this exercise, you quite likely need to remember [this trick](https://fullstackopen.com/en/part9/grande_finale_patientor#omit-with-unions).
+
+You may assume that only correct diagnostics code values are sent to the backend.
+
+**Hint:** If you have defined the `HealthCheckRating` with a const object
+
+```ts
+export const HealthCheckRating = {
+   Healthy: 0,
+   LowRisk: 1,
+   HighRisk: 2,
+   CriticalRisk: 3,
+ } as const;
+```
+
+You can not use a Zod enum for validation since it does not support number values. Instead, you can use the Zod [union](https://zod.dev/api?id=unions):
+
+```ts
+z.union([
+  z.literal(HealthCheckRating.Healthy),
+  z.literal(HealthCheckRating.LowRisk),
+  z.literal(HealthCheckRating.HighRisk),
+  z.literal(HealthCheckRating.CriticalRisk),
+])
+```
