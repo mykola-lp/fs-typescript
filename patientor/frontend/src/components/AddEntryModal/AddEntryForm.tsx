@@ -24,6 +24,13 @@ const entryTypeOptions = [
   { value: "Hospital", label: "Hospital" },
 ] as const;
 
+const healthRatingOptions = [
+  { value: 0, label: "0 — Healthy" },
+  { value: 1, label: "1 — Low Risk" },
+  { value: 2, label: "2 — High Risk" },
+  { value: 3, label: "3 — Critical Risk" },
+] as const;
+
 type EntryType = EntryWithoutId["type"];
 
 interface Props {
@@ -36,7 +43,7 @@ const AddEntryForm = ({ onCancel, onSubmit }: Props) => {
   const [date, setDate] = useState<Dayjs | null>(dayjs());
   const [description, setDescription] = useState('');
   const [specialist, setSpecialist] = useState('');
-  const [healthCheckRating, setHealthCheckRating] = useState('');
+  const [healthCheckRating, setHealthCheckRating] = useState<0 | 1 | 2 | 3>(0);
   const [diagnosisCodes, setDiagnosisCodes] = useState('');
   const [employerName, setEmployerName] = useState('');
   const [sickLeaveStartDate, setSickLeaveStartDate] = useState('');
@@ -68,7 +75,7 @@ const AddEntryForm = ({ onCancel, onSubmit }: Props) => {
       onSubmit({
         type,
         ...commonFields,
-        healthCheckRating: Number(healthCheckRating) as 0 | 1 | 2 | 3,
+        healthCheckRating,
       });
       return;
     }
@@ -151,15 +158,6 @@ const AddEntryForm = ({ onCancel, onSubmit }: Props) => {
         />
 
         <TextField
-          label="Health check rating (0-3)"
-          required
-          fullWidth
-          sx={{ mb: 2 }}
-          value={healthCheckRating}
-          onChange={({ target }) => setHealthCheckRating(target.value)}
-        />
-
-        <TextField
           label="Diagnosis codes (comma-separated)"
           fullWidth
           sx={{ mb: 2 }}
@@ -168,14 +166,23 @@ const AddEntryForm = ({ onCancel, onSubmit }: Props) => {
         />
 
         {type === "HealthCheck" && (
-          <TextField
-            label="Health Check Rating (0-3)"
-            required
-            fullWidth
-            sx={{ mb: 2 }}
-            value={healthCheckRating}
-            onChange={({ target }) => setHealthCheckRating(target.value)}
-          />
+          <FormControl fullWidth sx={{ mb: 2 }}>
+            <InputLabel id="health-rating-label">Health Check Rating</InputLabel>
+            <Select<0 | 1 | 2 | 3>
+              labelId="health-rating-label"
+              value={healthCheckRating}
+              label="Health Check Rating"
+              onChange={({ target }) =>
+                setHealthCheckRating(Number(target.value) as 0 | 1 | 2 | 3)
+              }
+            >
+              {healthRatingOptions.map((option) => (
+                <MenuItem key={option.value} value={option.value}>
+                  {option.label}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
         )}
 
         {type === "OccupationalHealthcare" && (
