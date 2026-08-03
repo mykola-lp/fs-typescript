@@ -1,5 +1,7 @@
 import { useState, SyntheticEvent } from "react";
 
+import dayjs, { type Dayjs } from "dayjs";
+
 import {
   Box,
   Button,
@@ -10,6 +12,9 @@ import {
   SelectChangeEvent,
   TextField,
 } from '@mui/material';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 
 import { EntryWithoutId } from "../../types";
 
@@ -28,7 +33,7 @@ interface Props {
 
 const AddEntryForm = ({ onCancel, onSubmit }: Props) => {
   const [type, setType] = useState<EntryType>("HealthCheck");
-  const [date, setDate] = useState('');
+  const [date, setDate] = useState<Dayjs | null>(dayjs());
   const [description, setDescription] = useState('');
   const [specialist, setSpecialist] = useState('');
   const [healthCheckRating, setHealthCheckRating] = useState('');
@@ -50,8 +55,10 @@ const AddEntryForm = ({ onCancel, onSubmit }: Props) => {
       ? diagnosisCodes.split(',').map((code) => code.trim()).filter(Boolean)
       : undefined;
 
+    const parsedDate = date?.format("YYYY-MM-DD") ?? "";
+
     const commonFields = {
-      date,
+      date: parsedDate,
       description,
       specialist,
       diagnosisCodes: diagnosisValue,
@@ -93,7 +100,8 @@ const AddEntryForm = ({ onCancel, onSubmit }: Props) => {
   };
 
   return (
-    <Box component="form" onSubmit={addEntry} sx={{ mt: 2 }}>
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
+      <Box component="form" onSubmit={addEntry} sx={{ mt: 2 }}>
         <FormControl fullWidth sx={{ mb: 2 }}>
           <InputLabel id="entry-type-label">Entry type</InputLabel>
 
@@ -111,14 +119,17 @@ const AddEntryForm = ({ onCancel, onSubmit }: Props) => {
           </Select>
         </FormControl>
 
-        <TextField
+        <DatePicker
           label="Date"
-          required
-          placeholder="YYYY-MM-DD"
-          fullWidth
-          sx={{ mb: 2 }}
           value={date}
-          onChange={({ target }) => setDate(target.value)}
+          onChange={(newValue) => setDate(newValue)}
+          slotProps={{
+            textField: {
+              required: true,
+              fullWidth: true,
+              sx: { mb: 2 },
+            },
+          }}
         />
 
         <TextField
@@ -237,7 +248,8 @@ const AddEntryForm = ({ onCancel, onSubmit }: Props) => {
             Cancel
           </Button>
         </Box>
-    </Box>
+      </Box>
+    </LocalizationProvider>
   );
 };
 
