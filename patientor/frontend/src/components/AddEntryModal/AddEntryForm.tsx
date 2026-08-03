@@ -1,6 +1,6 @@
 import { useState, SyntheticEvent } from "react";
 
-import { TextField, Grid, Button } from '@mui/material';
+import { Box, TextField, Button } from '@mui/material';
 
 import { EntryWithoutId } from "../../types";
 
@@ -32,33 +32,40 @@ const AddEntryForm = ({ onCancel, onSubmit }: Props) => {
   };
 
   return (
-    <div>
-      <form onSubmit={addEntry}>
+    <Box component="form" onSubmit={addEntry} sx={{ mt: 2 }}>
         <TextField
           label="Date"
+          required
           placeholder="YYYY-MM-DD"
           fullWidth
+          sx={{ mb: 2 }}
           value={date}
           onChange={({ target }) => setDate(target.value)}
         />
 
         <TextField
           label="Description"
+          required
           fullWidth
+          sx={{ mb: 2 }}
           value={description}
           onChange={({ target }) => setDescription(target.value)}
         />
 
         <TextField
           label="Specialist"
+          required
           fullWidth
+          sx={{ mb: 2 }}
           value={specialist}
           onChange={({ target }) => setSpecialist(target.value)}
         />
 
         <TextField
           label="Health check rating (0-3)"
+          required
           fullWidth
+          sx={{ mb: 2 }}
           value={healthCheckRating}
           onChange={({ target }) => setHealthCheckRating(target.value)}
         />
@@ -66,33 +73,28 @@ const AddEntryForm = ({ onCancel, onSubmit }: Props) => {
         <TextField
           label="Diagnosis codes (comma-separated)"
           fullWidth
+          sx={{ mb: 2 }}
           value={diagnosisCodes}
           onChange={({ target }) => setDiagnosisCodes(target.value)}
         />
 
-        <Grid container justifyContent="space-between" sx={{ marginTop: 2 }}>
-          <Grid size="auto">
-            <Button
-              color="secondary"
-              variant="contained"
-              type="button"
-              onClick={onCancel}
-            >
-              Cancel
-            </Button>
-          </Grid>
+        <Box sx={{ display: "flex", gap: 2, mt: 1 }}>
+          <Button
+            type="submit"
+            variant="contained"
+          >
+            Add
+          </Button>
 
-          <Grid size="auto">
-            <Button
-              type="submit"
-              variant="contained"
-            >
-              Add
-            </Button>
-          </Grid>
-        </Grid>
-      </form>
-    </div>
+          <Button
+            type="button"
+            variant="outlined"
+            onClick={onCancel}
+          >
+            Cancel
+          </Button>
+        </Box>
+    </Box>
   );
 };
 

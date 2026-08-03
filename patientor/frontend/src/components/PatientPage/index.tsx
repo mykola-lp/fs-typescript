@@ -55,6 +55,7 @@ const PatientPage = ({ diagnoses }: Props) => {
     try {
       const newEntry = await patientService.createEntry(id, values);
       setPatient({ ...patient, entries: patient.entries.concat(newEntry) });
+      setError(undefined);
       setModalOpen(false);
     } catch (e: unknown) {
       if (axios.isAxiosError(e)) {
