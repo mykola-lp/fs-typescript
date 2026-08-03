@@ -130,3 +130,7 @@ In this exercise, it is enough to support one entry type. All the fields in the 
 Upon a successful submission the new entry should be added to the correct patient and the patient's entries on the patient page should be updated to contain the new entry.
 
 If a user enters invalid values to the form and backend rejects the addition, show a proper error message to the user.
+
+### Exercise 31: Patientor, step9
+
+Extend your solution so that it supports all the entry types.
