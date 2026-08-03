@@ -1,17 +1,25 @@
 import { useState, SyntheticEvent } from "react";
 
+import dayjs, { type Dayjs } from "dayjs";
+
 import {
   Box,
   Button,
+  Chip,
   FormControl,
   InputLabel,
   MenuItem,
+  OutlinedInput,
   Select,
   SelectChangeEvent,
   TextField,
 } from '@mui/material';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 
 import { EntryWithoutId } from "../../types";
+import type { Diagnosis } from "../../types";
 
 const entryTypeOptions = [
   { value: "HealthCheck", label: "Health Check" },
@@ -19,20 +27,28 @@ const entryTypeOptions = [
   { value: "Hospital", label: "Hospital" },
 ] as const;
 
+const healthRatingOptions = [
+  { value: 0, label: "0 — Healthy" },
+  { value: 1, label: "1 — Low Risk" },
+  { value: 2, label: "2 — High Risk" },
+  { value: 3, label: "3 — Critical Risk" },
+] as const;
+
 type EntryType = EntryWithoutId["type"];
 
 interface Props {
   onCancel: () => void;
   onSubmit: (values: EntryWithoutId) => void;
+  diagnoses: Diagnosis[];
 }
 
-const AddEntryForm = ({ onCancel, onSubmit }: Props) => {
+const AddEntryForm = ({ onCancel, onSubmit, diagnoses }: Props) => {
   const [type, setType] = useState<EntryType>("HealthCheck");
-  const [date, setDate] = useState('');
+  const [date, setDate] = useState<Dayjs | null>(dayjs());
   const [description, setDescription] = useState('');
   const [specialist, setSpecialist] = useState('');
-  const [healthCheckRating, setHealthCheckRating] = useState('');
-  const [diagnosisCodes, setDiagnosisCodes] = useState('');
+  const [healthCheckRating, setHealthCheckRating] = useState<0 | 1 | 2 | 3>(0);
+  const [diagnosisCodes, setDiagnosisCodes] = useState<string[]>([]);
   const [employerName, setEmployerName] = useState('');
   const [sickLeaveStartDate, setSickLeaveStartDate] = useState('');
   const [sickLeaveEndDate, setSickLeaveEndDate] = useState('');
@@ -46,22 +62,18 @@ const AddEntryForm = ({ onCancel, onSubmit }: Props) => {
   const addEntry = (event: SyntheticEvent) => {
     event.preventDefault();
 
-    const diagnosisValue = diagnosisCodes
-      ? diagnosisCodes.split(',').map((code) => code.trim()).filter(Boolean)
-      : undefined;
-
     const commonFields = {
-      date,
+      date: date?.format("YYYY-MM-DD") ?? "",
       description,
       specialist,
-      diagnosisCodes: diagnosisValue,
+      diagnosisCodes: diagnosisCodes.length > 0 ? diagnosisCodes : undefined,
     };
 
     if (type === "HealthCheck") {
       onSubmit({
         type,
         ...commonFields,
-        healthCheckRating: Number(healthCheckRating) as 0 | 1 | 2 | 3,
+        healthCheckRating,
       });
       return;
     }
@@ -92,8 +104,21 @@ const AddEntryForm = ({ onCancel, onSubmit }: Props) => {
     });
   };
 
+  const diagnosisOptions = diagnoses.map((diagnosis) => ({
+    value: diagnosis.code,
+    label: `${diagnosis.code} — ${diagnosis.name}`,
+  }));
+
+  const handleDiagnosisCodesChange = (
+    event: SelectChangeEvent<string[]>,
+  ) => {
+    const value = event.target.value;
+    setDiagnosisCodes(typeof value === "string" ? value.split(",") : value);
+  };
+
   return (
-    <Box component="form" onSubmit={addEntry} sx={{ mt: 2 }}>
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
+      <Box component="form" onSubmit={addEntry} sx={{ mt: 2 }}>
         <FormControl fullWidth sx={{ mb: 2 }}>
           <InputLabel id="entry-type-label">Entry type</InputLabel>
 
@@ -111,14 +136,17 @@ const AddEntryForm = ({ onCancel, onSubmit }: Props) => {
           </Select>
         </FormControl>
 
-        <TextField
+        <DatePicker
           label="Date"
-          required
-          placeholder="YYYY-MM-DD"
-          fullWidth
-          sx={{ mb: 2 }}
           value={date}
-          onChange={({ target }) => setDate(target.value)}
+          onChange={(newValue) => setDate(newValue)}
+          slotProps={{
+            textField: {
+              required: true,
+              fullWidth: true,
+              sx: { mb: 2 },
+            },
+          }}
         />
 
         <TextField
@@ -139,32 +167,61 @@ const AddEntryForm = ({ onCancel, onSubmit }: Props) => {
           onChange={({ target }) => setSpecialist(target.value)}
         />
 
-        <TextField
-          label="Health check rating (0-3)"
-          required
-          fullWidth
-          sx={{ mb: 2 }}
-          value={healthCheckRating}
-          onChange={({ target }) => setHealthCheckRating(target.value)}
-        />
+        <FormControl fullWidth sx={{ mb: 2 }}>
+          <InputLabel id="diagnosis-codes-label" shrink>
+            Diagnosis codes
+          </InputLabel>
 
-        <TextField
-          label="Diagnosis codes (comma-separated)"
-          fullWidth
-          sx={{ mb: 2 }}
-          value={diagnosisCodes}
-          onChange={({ target }) => setDiagnosisCodes(target.value)}
-        />
+          <Select<string[]>
+            labelId="diagnosis-codes-label"
+            multiple
+            displayEmpty
+            value={diagnosisCodes}
+            onChange={handleDiagnosisCodesChange}
+            input={<OutlinedInput label="Diagnosis Codes" />}
+            renderValue={(selected) => (
+              selected.length > 0 ? (
+                <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
+                  {selected.map((code) => (
+                    <Chip key={code} label={code} />
+                  ))}
+                </Box>
+              ) : (
+                <Box sx={{ color: "text.disabled" }}>
+                  Select Diagnosis Codes
+                </Box>
+              )
+            )}
+          >
+            {diagnosisOptions.map((option) => (
+              <MenuItem key={option.value} value={option.value}>
+                {option.label}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
 
         {type === "HealthCheck" && (
-          <TextField
-            label="Health Check Rating (0-3)"
-            required
-            fullWidth
-            sx={{ mb: 2 }}
-            value={healthCheckRating}
-            onChange={({ target }) => setHealthCheckRating(target.value)}
-          />
+          <FormControl fullWidth sx={{ mb: 2 }}>
+            <InputLabel id="health-rating-label" shrink>
+              Health Check Rating
+            </InputLabel>
+
+            <Select<0 | 1 | 2 | 3>
+              labelId="health-rating-label"
+              value={healthCheckRating}
+              label="Health Check Rating"
+              onChange={({ target }) =>
+                setHealthCheckRating(Number(target.value) as 0 | 1 | 2 | 3)
+              }
+            >
+              {healthRatingOptions.map((option) => (
+                <MenuItem key={option.value} value={option.value}>
+                  {option.label}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
         )}
 
         {type === "OccupationalHealthcare" && (
@@ -237,7 +294,8 @@ const AddEntryForm = ({ onCancel, onSubmit }: Props) => {
             Cancel
           </Button>
         </Box>
-    </Box>
+      </Box>
+    </LocalizationProvider>
   );
 };
 

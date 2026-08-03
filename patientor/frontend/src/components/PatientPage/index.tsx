@@ -138,6 +138,7 @@ const PatientPage = ({ diagnoses }: Props) => {
         error={error}
         onClose={closeModal}
         title="New Entry"
+        diagnoses={diagnoses}
       />
 
       <Button variant="contained" sx={{ marginTop: "1em" }} onClick={() => openModal()}>
