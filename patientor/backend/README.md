@@ -1,13 +1,8 @@
 # Patientor backend
 
 ### Getting started
-
-<b>Clone project:</b>
-
-```bash
-git clone <repository-url>
-cd <project-folder>
-```
+  - To get the app running just install its dependencies with ```npm install``` and run it with ```npm run dev```.
+  - The app should work without a frontend, but make sure that the request made to ```/api/ping``` made on startup is successful before continuing.
 
 ## Exercises
 
