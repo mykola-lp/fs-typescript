@@ -14,7 +14,6 @@ import {
   SelectChangeEvent,
   TextField,
 } from '@mui/material';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 
@@ -136,17 +135,13 @@ const AddEntryForm = ({ onCancel, onSubmit, diagnoses }: Props) => {
           </Select>
         </FormControl>
 
-        <DatePicker
+        <TextField
           label="Date"
-          value={date}
-          onChange={(newValue) => setDate(newValue)}
-          slotProps={{
-            textField: {
-              required: true,
-              fullWidth: true,
-              sx: { mb: 2 },
-            },
-          }}
+          type="date"
+          required
+          fullWidth sx={{ mb: 2 }}
+          value={date?.format("YYYY-MM-DD") ?? ""}
+          onChange={({ target }) => setDate(dayjs(target.value))}
         />
 
         <TextField

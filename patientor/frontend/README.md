@@ -146,3 +146,17 @@ Your improved form might look something like the following.
 2. Health rating is selected with Material UI [select](https://mui.com/material-ui/react-select/)
 
 3. Diagnostic codes set with Material UI [multiple select](https://mui.com/material-ui/react-select/#multiple-select)
+
+### Exercise 33: Patientor, the final check
+
+As you might have guessed, it is time to test the Patientor app as a whole. Similar to Exercises [8](https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-typescript/chapter-3#7d395c4f-af73-40ae-a915-01b600ff8f93) and [16](https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-typescript/chapter-4#b6ae0349-ef8d-4191-b97a-ef5d751e8800), run the tests in the directory patientor-tests. Tests expect that the frontend is running at port 5173.
+
+Enable test also in GitHub by modifying .github/workflows/patientor-e2e-tests.yml as follows:
+
+```yaml
+name: Patientor E2E Tests
+
+on:
+  push:
+    branches: [ main, master ]
+```
