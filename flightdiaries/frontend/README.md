@@ -1,3 +1,9 @@
+# Flightdiaries frontend
+
+### Getting started
+  - To get the app running just install its dependencies with ```npm install``` and run it with ```npm run dev```.
+  - The app should work without a backend.
+
 ## Exercises
 
 ### Exercise 19: Flight diaries, step1

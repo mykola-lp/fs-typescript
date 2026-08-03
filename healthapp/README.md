@@ -1,11 +1,7 @@
-## Getting Started
+# Healthapp
 
-<b>Clone project:</b>
-
-```bash
-git clone <repository-url>
-cd <project-folder>
-```
+### Getting started
+  - To get the app running just install its dependencies with ```npm install``` and run it with ```npm run dev```.
 
 ## Exercises
 
