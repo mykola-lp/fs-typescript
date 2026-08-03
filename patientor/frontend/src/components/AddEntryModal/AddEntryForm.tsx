@@ -5,9 +5,11 @@ import dayjs, { type Dayjs } from "dayjs";
 import {
   Box,
   Button,
+  Chip,
   FormControl,
   InputLabel,
   MenuItem,
+  OutlinedInput,
   Select,
   SelectChangeEvent,
   TextField,
@@ -17,6 +19,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 
 import { EntryWithoutId } from "../../types";
+import type { Diagnosis } from "../../types";
 
 const entryTypeOptions = [
   { value: "HealthCheck", label: "Health Check" },
@@ -36,15 +39,16 @@ type EntryType = EntryWithoutId["type"];
 interface Props {
   onCancel: () => void;
   onSubmit: (values: EntryWithoutId) => void;
+  diagnoses: Diagnosis[];
 }
 
-const AddEntryForm = ({ onCancel, onSubmit }: Props) => {
+const AddEntryForm = ({ onCancel, onSubmit, diagnoses }: Props) => {
   const [type, setType] = useState<EntryType>("HealthCheck");
   const [date, setDate] = useState<Dayjs | null>(dayjs());
   const [description, setDescription] = useState('');
   const [specialist, setSpecialist] = useState('');
   const [healthCheckRating, setHealthCheckRating] = useState<0 | 1 | 2 | 3>(0);
-  const [diagnosisCodes, setDiagnosisCodes] = useState('');
+  const [diagnosisCodes, setDiagnosisCodes] = useState<string[]>([]);
   const [employerName, setEmployerName] = useState('');
   const [sickLeaveStartDate, setSickLeaveStartDate] = useState('');
   const [sickLeaveEndDate, setSickLeaveEndDate] = useState('');
@@ -58,17 +62,11 @@ const AddEntryForm = ({ onCancel, onSubmit }: Props) => {
   const addEntry = (event: SyntheticEvent) => {
     event.preventDefault();
 
-    const diagnosisValue = diagnosisCodes
-      ? diagnosisCodes.split(',').map((code) => code.trim()).filter(Boolean)
-      : undefined;
-
-    const parsedDate = date?.format("YYYY-MM-DD") ?? "";
-
     const commonFields = {
-      date: parsedDate,
+      date: date?.format("YYYY-MM-DD") ?? "",
       description,
       specialist,
-      diagnosisCodes: diagnosisValue,
+      diagnosisCodes: diagnosisCodes.length > 0 ? diagnosisCodes : undefined,
     };
 
     if (type === "HealthCheck") {
@@ -104,6 +102,18 @@ const AddEntryForm = ({ onCancel, onSubmit }: Props) => {
             }
           : undefined,
     });
+  };
+
+  const diagnosisOptions = diagnoses.map((diagnosis) => ({
+    value: diagnosis.code,
+    label: `${diagnosis.code} — ${diagnosis.name}`,
+  }));
+
+  const handleDiagnosisCodesChange = (
+    event: SelectChangeEvent<string[]>,
+  ) => {
+    const value = event.target.value;
+    setDiagnosisCodes(typeof value === "string" ? value.split(",") : value);
   };
 
   return (
@@ -157,17 +167,46 @@ const AddEntryForm = ({ onCancel, onSubmit }: Props) => {
           onChange={({ target }) => setSpecialist(target.value)}
         />
 
-        <TextField
-          label="Diagnosis codes (comma-separated)"
-          fullWidth
-          sx={{ mb: 2 }}
-          value={diagnosisCodes}
-          onChange={({ target }) => setDiagnosisCodes(target.value)}
-        />
+        <FormControl fullWidth sx={{ mb: 2 }}>
+          <InputLabel id="diagnosis-codes-label" shrink>
+            Diagnosis codes
+          </InputLabel>
+
+          <Select<string[]>
+            labelId="diagnosis-codes-label"
+            multiple
+            displayEmpty
+            value={diagnosisCodes}
+            onChange={handleDiagnosisCodesChange}
+            input={<OutlinedInput label="Diagnosis Codes" />}
+            renderValue={(selected) => (
+              selected.length > 0 ? (
+                <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
+                  {selected.map((code) => (
+                    <Chip key={code} label={code} />
+                  ))}
+                </Box>
+              ) : (
+                <Box sx={{ color: "text.disabled" }}>
+                  Select Diagnosis Codes
+                </Box>
+              )
+            )}
+          >
+            {diagnosisOptions.map((option) => (
+              <MenuItem key={option.value} value={option.value}>
+                {option.label}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
 
         {type === "HealthCheck" && (
           <FormControl fullWidth sx={{ mb: 2 }}>
-            <InputLabel id="health-rating-label">Health Check Rating</InputLabel>
+            <InputLabel id="health-rating-label" shrink>
+              Health Check Rating
+            </InputLabel>
+
             <Select<0 | 1 | 2 | 3>
               labelId="health-rating-label"
               value={healthCheckRating}
