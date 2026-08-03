@@ -9,11 +9,12 @@ interface Props {
   onClose: () => void;
   onSubmit: (values: EntryWithoutId) => void;
   error?: string;
+  title?: string;
 }
 
-const AddEntryModal = ({ modalOpen, onClose, onSubmit, error }: Props) => (
+const AddEntryModal = ({ modalOpen, onClose, onSubmit, error, title = "New Entry" }: Props) => (
   <Dialog fullWidth={true} open={modalOpen} onClose={() => onClose()}>
-    <DialogTitle>New HealthCheck Entry</DialogTitle>
+    <DialogTitle>{title}</DialogTitle>
 
     <Divider />
 
