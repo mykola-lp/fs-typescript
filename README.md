@@ -1,5 +1,9 @@
 This is a [TypeScript](https://www.typescriptlang.org/) project.
 
+---
+
+**Course:** https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-typescript
+
 ## Getting started
 
 **Clone the entire repository:**
